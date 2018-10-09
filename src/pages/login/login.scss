@@ -1,0 +1,22 @@
+.myphoto {
+    background-color:#16a086;
+    
+    ion-content img {
+        height: 50vh !important;
+        width: auto !important;
+        align-items: center;
+    }
+
+    .item-md{
+        background: none !important;
+        color: #062F28;
+    }
+
+    .item-input-has-focus ion-label{
+        color: #FFF!important;
+    }
+
+    .item-input-has-focus .item-inner{
+        border-bottom: 1px solid #FFF!important;
+    }
+}
