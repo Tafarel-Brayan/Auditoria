@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { HttpModule } from '@angular/Http';
 
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -39,8 +39,8 @@ import { AuthProvider } from '../providers/auth/auth';
   providers: [
     StatusBar,
     SplashScreen,
+    AuthProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider
   ]
 })
 export class AppModule {}

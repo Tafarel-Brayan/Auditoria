@@ -1,5 +1,5 @@
 export class Utils {
 
-  public static WERBSERVICE = "http://digiboard.com.br/webservice/";
+  public static WERBSERVICE = "http://10.0.0.105/webservice";
 
 }
