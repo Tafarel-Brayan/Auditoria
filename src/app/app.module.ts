@@ -7,20 +7,21 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { AuditoriaPageModule } from '../pages/auditoria/auditoria.module';
 import { AuthProvider } from '../providers/auth/auth';
+import { VwListAuditRespStatusProvider } from '../providers/vw-list-audit-resp-status/vw-list-audit-resp-status';
+import { AuditoriaFormPage } from '../pages/auditoria-form/auditoria-form';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     LoginPage,
+    AuditoriaFormPage
   ],
   imports: [
     BrowserModule,
@@ -33,14 +34,15 @@ import { AuthProvider } from '../providers/auth/auth';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     LoginPage,
+    AuditoriaFormPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     AuthProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    VwListAuditRespStatusProvider,
   ]
 })
 export class AppModule {}

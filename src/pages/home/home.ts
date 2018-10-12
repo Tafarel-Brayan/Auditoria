@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { LoginPage } from '../login/login';
 import { AuditoriaPage } from '../auditoria/auditoria';
+import { HomeInterface } from './homeInterface';
+import { VwListAuditRespStatusProvider } from '../../providers/vw-list-audit-resp-status/vw-list-audit-resp-status';
 
 @Component({
 	selector: 'page-home',
@@ -10,13 +12,26 @@ import { AuditoriaPage } from '../auditoria/auditoria';
 })
 export class HomePage {
 	
+	dataHome: HomeInterface[];
+
 	constructor(public navCtrl: NavController,
-		public authProvider: AuthProvider ) {
+		public authProvider: AuthProvider,
+		public vwAuditProvider:VwListAuditRespStatusProvider
+		) {
 			
 		}
 		
-		auditar(){
-			this.navCtrl.push(AuditoriaPage);
+		auditar(audi_id){
+			this.navCtrl.push(AuditoriaPage, {audi_id:audi_id});
+		}
+
+		ionViewDidLoad(){
+
+			this.vwAuditProvider.findAll()
+			.subscribe(
+				data => this.dataHome = data
+			)
+
 		}
 		
 		ionViewCanEnter(){

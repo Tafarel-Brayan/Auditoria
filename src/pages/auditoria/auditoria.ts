@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
  * Generated class for the AuditoriaPage tabs.
@@ -19,7 +19,12 @@ export class AuditoriaPage {
   checklistRoot = 'ChecklistPage'
   summaryAuditorRoot = 'SummaryAuditorPage'
 
+  audi_id:number;
 
-  constructor(public navCtrl: NavController) {}
+
+  constructor(public navCtrl: NavController,
+              private navParams: NavParams) {
+    this.audi_id = this.navParams.get('audi_id');
+  }
 
 }
