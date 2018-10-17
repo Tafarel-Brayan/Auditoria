@@ -15,6 +15,7 @@ import { AuditoriaPageModule } from '../pages/auditoria/auditoria.module';
 import { AuthProvider } from '../providers/auth/auth';
 import { VwListAuditRespStatusProvider } from '../providers/vw-list-audit-resp-status/vw-list-audit-resp-status';
 import { AuditoriaFormPage } from '../pages/auditoria-form/auditoria-form';
+import { AuditProvider } from '../providers/audit/audit';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { AuditoriaFormPage } from '../pages/auditoria-form/auditoria-form';
     AuthProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     VwListAuditRespStatusProvider,
+    AuditProvider,
   ]
 })
 export class AppModule {}
