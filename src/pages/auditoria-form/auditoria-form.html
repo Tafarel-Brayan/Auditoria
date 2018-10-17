@@ -7,7 +7,7 @@
 <ion-content>
     <ion-card>
         <form [formGroup]="formGroup" (ngSubmit)="cadastrar()">
-
+            
             <ion-grid>
                 <ion-card-header>
                     Supplier Audit Report   
@@ -15,9 +15,15 @@
                 
                 <ion-row>
                     <ion-col>
-                        <ion-item>
+                        <ion-item *ngIf="empresas"  >
                             <ion-label floating>1.1 Company Surveyed</ion-label>
-                            <ion-input type="text"  formControlName="audi_comp_id"></ion-input>
+                            
+                            <ion-select formControlName="audi_comp_id" [selectOptions]="{
+                                title: 'Empresa',
+                                subTitle: 'Selecione'
+                              }">
+                                <ion-option *ngFor="let empresa of empresas" value="{{ empresa.codigo }}"  >{{ empresa.empresa }}</ion-option>
+                            </ion-select>
                         </ion-item>                        
                     </ion-col>
                 </ion-row>
@@ -79,20 +85,20 @@
                     </ion-col>
                 </ion-row>
                 
-                <ion-row>
+                <!-- <ion-row>
                     <ion-col>
                         <ion-item>
                             <ion-label floating>1.7 Product, Material or commodity supplied</ion-label>
                             <ion-input type="text"  formControlName=""></ion-input>
                         </ion-item>        
                     </ion-col>
-                </ion-row>
+                </ion-row> -->
                 
                 <ion-row>
                     <ion-col>
                         <ion-item>
                             <ion-label floating>1.8 Supplier Representative</ion-label>
-                            <ion-input type="text"  formControlName=""></ion-input>
+                            <ion-input type="text"  formControlName="audi_supplier"></ion-input>
                         </ion-item>        
                     </ion-col>
                 </ion-row>
@@ -411,7 +417,7 @@
                     </ion-col>
                 </ion-row>
                 
-                <ion-row>
+                <!-- <ion-row>
                     <ion-col>
                         <ion-row>
                             <ion-col color="primary" >
@@ -433,7 +439,7 @@
                             </ion-col>
                         </ion-row>
                     </ion-col>
-                </ion-row>
+                </ion-row> -->
                 
                 <ion-row>
                     <ion-col>
@@ -484,7 +490,7 @@
                         </ion-row>
                     </ion-col>
                 </ion-row>
-
+                
                 <ion-row>
                     <ion-col>
                         <ion-item>
@@ -493,7 +499,7 @@
                         </ion-item>
                     </ion-col>
                 </ion-row>
-
+                
                 <ion-row>
                     <ion-col>
                         <ion-item>
@@ -502,7 +508,7 @@
                         </ion-item>
                     </ion-col>
                 </ion-row>
-
+                
                 <ion-row>
                     <ion-col>
                         <button type="submit" color="secondary" ion-button full [disabled]="!formGroup.valid">Cadastrar</button>

@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
 import { AuditProvider } from '../../providers/audit/audit';
+import { EmpresaInterface } from '../../providers/empresa/empresaInterface';
+import { EmpresaProvider } from '../../providers/empresa/empresa';
 
 @IonicPage()
 @Component({
@@ -11,11 +13,14 @@ import { AuditProvider } from '../../providers/audit/audit';
 })
 export class AuditoriaFormPage {
 
+  empresas: EmpresaInterface[];
+
   formGroup: FormGroup;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private formBuilder: FormBuilder,
+              private empresaService: EmpresaProvider,
               private auditService:AuditProvider) {
     this.formGroup = this.formBuilder.group({
       audi_id:[],
@@ -97,15 +102,15 @@ export class AuditoriaFormPage {
   }
 
   cadastrar(){
-
-    console.log(this.formGroup.value);
-
-    /*this.auditService.cadastrar(this.formGroup.value)
-    .subscribe(data => console.log(data))*/
+    this.auditService.cadastrar(this.formGroup.value)
+    .subscribe(data => console.log(data))
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AuditoriaFormPage');
+
+    this.empresaService.getEmpresa()
+    .subscribe( data => this.empresas = data );
+
   }
 
 }
