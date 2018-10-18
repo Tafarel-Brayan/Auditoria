@@ -17,7 +17,7 @@ import { VwListAuditRespStatusProvider } from '../providers/vw-list-audit-resp-s
 import { AuditoriaFormPage } from '../pages/auditoria-form/auditoria-form';
 import { AuditProvider } from '../providers/audit/audit';
 import { EmpresaProvider } from '../providers/empresa/empresa';
-
+import { LoginService } from '../pages/login/login.service';
 @NgModule({
   declarations: [
     MyApp,
@@ -47,6 +47,8 @@ import { EmpresaProvider } from '../providers/empresa/empresa';
     VwListAuditRespStatusProvider,
     AuditProvider,
     EmpresaProvider,
+    LoginService
+
   ]
 })
 export class AppModule {}

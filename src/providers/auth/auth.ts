@@ -18,16 +18,11 @@ export class AuthProvider {
 	}
 	
 	isLogged(){
-		return this.storage.get('usua_id');
+		return sessionStorage.getItem('usua_id');
 	}
 	
 	logout(){
-		this.storage.remove("usua_id");
-		this.storage.remove("usua_nome");
-		this.storage.remove("usua_login");
-		this.storage.remove("usua_cpf");
-		this.storage.remove("usem_empr_id");
-		this.storage.remove("usem_empr_nome");
+		sessionStorage.clear()
 	}
 	
 }

@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { Storage } from '@ionic/storage';
 import { HomePage } from '../home/home';
+import { LoginService } from './login.service';
 
 @IonicPage()
 @Component({
@@ -19,7 +20,8 @@ export class LoginPage {
 		private formBuilder: FormBuilder,
 		public auth: AuthProvider,
 		private storage: Storage,
-		public toastCtrl: ToastController
+		public toastCtrl: ToastController,
+		public loginService: LoginService
 		) {
 			this.credentialsForm = this.formBuilder.group({
 				usuario:['', Validators.required],
@@ -32,13 +34,13 @@ export class LoginPage {
 			
 			this.auth.login(this.credentialsForm.controls.usuario.value, this.credentialsForm.controls.senha.value)
 			.subscribe( (data) =>  {
-				
-				this.storage.set("usua_id", data.usua_id);
-				this.storage.set("usua_nome", data.usua_nome);
-				this.storage.set("usua_login", data.usua_login);
-				this.storage.set("usua_cpf", data.usua_cpf);
-				this.storage.set("usem_empr_id", data.usem_empr_id);
-				this.storage.set("usem_empr_nome", data.usem_empr_nome);
+				this.loginService.notify({"name": data.usua_nome, "empresa": data.usem_empr_nome})
+				sessionStorage.setItem("usua_id", data.usua_id);
+				sessionStorage.setItem("usua_nome", data.usua_nome);
+				sessionStorage.setItem("usua_login", data.usua_login);
+				sessionStorage.setItem("usua_cpf", data.usua_cpf);
+				sessionStorage.setItem("usem_empr_id", ""+data.usem_empr_id);
+				sessionStorage.setItem("usem_empr_nome", data.usem_empr_nome);
 				this.navCtrl.setRoot(HomePage);
 				
 			},

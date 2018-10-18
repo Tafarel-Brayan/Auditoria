@@ -6,6 +6,8 @@ import { AuditProvider } from '../../providers/audit/audit';
 import { EmpresaInterface } from '../../providers/empresa/empresaInterface';
 import { EmpresaProvider } from '../../providers/empresa/empresa';
 import { AuthProvider } from '../../providers/auth/auth';
+import { HomePage } from '../home/home';
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -15,7 +17,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class AuditoriaFormPage {
 
 	empresas: EmpresaInterface[];
-	_audi_user_id_auditor_digiboard:number;
+	_audi_user_id_auditor_digiboard:string;
 
 	formGroup: FormGroup;
 
@@ -105,9 +107,13 @@ export class AuditoriaFormPage {
 	}
 
 	cadastrar(){
+
+		//console.log("session", this._audi_user_id_auditor_digiboard);
 		this.formGroup.value.audi_user_id_auditor_digiboard = this._audi_user_id_auditor_digiboard;
 		this.auditService.cadastrar(this.formGroup.value)
-		.subscribe(data => console.log(data))
+		.subscribe(data => {
+			this.navCtrl.push(HomePage);
+		});
 	}
 
 	ionViewDidLoad() {
@@ -115,13 +121,14 @@ export class AuditoriaFormPage {
 		this.empresaService.getEmpresa()
 		.subscribe( data => this.empresas = data );
 
-		this.authService.isLogged().then(
-			(val) => {
-				console.log(val);
-				this._audi_user_id_auditor_digiboard = val
-			}
-		);
+		this._audi_user_id_auditor_digiboard = sessionStorage.getItem('usua_id');
 
+	}
+
+	ionViewCanEnter(){
+		if(this.authService.isLogged() === null ){
+			this.navCtrl.setRoot(LoginPage);
+		}
 	}
 
 }
