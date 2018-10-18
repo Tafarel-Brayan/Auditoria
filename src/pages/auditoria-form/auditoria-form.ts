@@ -108,7 +108,6 @@ export class AuditoriaFormPage {
 
 	cadastrar(){
 
-		//console.log("session", this._audi_user_id_auditor_digiboard);
 		this.formGroup.value.audi_user_id_auditor_digiboard = this._audi_user_id_auditor_digiboard;
 		this.auditService.cadastrar(this.formGroup.value)
 		.subscribe(data => {

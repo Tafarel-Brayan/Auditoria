@@ -22,7 +22,7 @@ export class AuthProvider {
 	}
 	
 	logout(){
-		sessionStorage.clear()
+		sessionStorage.removeItem('usua_id')
 	}
 	
 }
