@@ -13,8 +13,6 @@ export class AuthProvider {
 	}
 	
 	login(user, password):Observable<LoginInterface> {
-		
-		
 		return this.http.get(`${Utils.WERBSERVICE}/acesso/login/login/${user}/senha/${password}`)
 		.map( (res:Response) => res.json());
 	}

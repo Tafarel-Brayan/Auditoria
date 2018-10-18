@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl  } from '@angular/forms';
 import { AuditProvider } from '../../providers/audit/audit';
 import { EmpresaInterface } from '../../providers/empresa/empresaInterface';
 import { EmpresaProvider } from '../../providers/empresa/empresa';
+import { AuthProvider } from '../../providers/auth/auth';
 
 @IonicPage()
 @Component({
@@ -14,17 +15,19 @@ import { EmpresaProvider } from '../../providers/empresa/empresa';
 export class AuditoriaFormPage {
 
   empresas: EmpresaInterface[];
+  audi_user_id_auditor_digiboard:number;
 
   formGroup: FormGroup;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private formBuilder: FormBuilder,
+              private authService: AuthProvider,
               private empresaService: EmpresaProvider,
               private auditService:AuditProvider) {
     this.formGroup = this.formBuilder.group({
       audi_id:[],
-      audi_comp_id:[],
+      audi_comp_id:['', Validators.required],
       audi_mfg_surveyed:[],
       audi_mfg_address:[],
       audi_mfg_phone:[],
@@ -102,6 +105,9 @@ export class AuditoriaFormPage {
   }
 
   cadastrar(){
+
+    console.log(this.audi_user_id_auditor_digiboard);
+    this.formGroup.addControl('audi_user_id_auditor_digiboard',  new FormControl(this.audi_user_id_auditor_digiboard) );
     this.auditService.cadastrar(this.formGroup.value)
     .subscribe(data => console.log(data))
   }
@@ -110,6 +116,13 @@ export class AuditoriaFormPage {
 
     this.empresaService.getEmpresa()
     .subscribe( data => this.empresas = data );
+
+    this.authService.isLogged().then(
+      (val) => {
+        console.log(val); 
+        this.audi_user_id_auditor_digiboard = val
+      }
+    );
 
   }
 
