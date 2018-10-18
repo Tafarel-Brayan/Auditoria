@@ -1,0 +1,522 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Cadastrar Auditoria</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <form [formGroup]="formGroup" (ngSubmit)="cadastrar()">
+            
+            <ion-grid>
+                <ion-card-header>
+                    Supplier Audit Report   
+                </ion-card-header>
+                
+                <ion-row>
+                    <ion-col>
+                        <ion-item *ngIf="empresas"  >
+                            <ion-label floating>1.1 Company Surveyed</ion-label>
+                            
+                            <ion-select formControlName="audi_comp_id" [selectOptions]="{
+                                title: 'Empresa',
+                                subTitle: 'Selecione'
+                              }">
+                                <ion-option *ngFor="let empresa of empresas" value="{{ empresa.codigo }}"  >{{ empresa.empresa }}</ion-option>
+                            </ion-select>
+                        </ion-item>                        
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label floating>1.2 Company Address</ion-label>
+                            <ion-input type="text"></ion-input>
+                        </ion-item>        
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label floating>1.3 Company Phone</ion-label>
+                            <ion-input type="text"></ion-input>
+                        </ion-item>        
+                    </ion-col>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label floating>Fax Number</ion-label>
+                            <ion-input type="text"></ion-input>
+                        </ion-item>        
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label floating>1.4 Mfg Surveyed</ion-label>
+                            <ion-input type="text"  formControlName="audi_mfg_surveyed"></ion-input>
+                        </ion-item>        
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label floating>1.5 Mfg Address</ion-label>
+                            <ion-input type="text"  formControlName="audi_mfg_address"></ion-input>
+                        </ion-item>        
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label floating>1.6 Mfg Phone</ion-label>
+                            <ion-input type="text"  formControlName="audi_mfg_phone"></ion-input>
+                        </ion-item>        
+                    </ion-col>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label floating>Fax Number</ion-label>
+                            <ion-input type="text"  formControlName="audi_mfg_fax"></ion-input>
+                        </ion-item>        
+                    </ion-col>
+                </ion-row>
+                
+                <!-- <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label floating>1.7 Product, Material or commodity supplied</ion-label>
+                            <ion-input type="text"  formControlName=""></ion-input>
+                        </ion-item>        
+                    </ion-col>
+                </ion-row> -->
+                
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label floating>1.8 Supplier Representative</ion-label>
+                            <ion-input type="text"  formControlName="audi_supplier"></ion-input>
+                        </ion-item>        
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        <ion-row>
+                            <ion-col color="primary" >
+                                President
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Name</ion-label>
+                                    <ion-input type="text" formControlName="audi_president_name"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Phone/Mobile Phone"</ion-label>
+                                    <ion-input type="text" formControlName="audi_president_phone"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Email</ion-label>
+                                    <ion-input type="text" formControlName="audi_president_email"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        
+                        <ion-row>
+                            <ion-col color="primary" >
+                                GM
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Name</ion-label>
+                                    <ion-input type="text" formControlName="audi_gm_name"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Phone/Mobile Phone</ion-label>
+                                    <ion-input type="text" formControlName="audi_gm_phone"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Email</ion-label>
+                                    <ion-input type="text" formControlName="audi_gm_email"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        
+                        <ion-row>
+                            <ion-col color="primary" >
+                                QA Head
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Name</ion-label>
+                                    <ion-input type="text" formControlName="audi_qahead_name"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Phone/Mobile Phone</ion-label>
+                                    <ion-input type="text" formControlName="audi_qahead_phone"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Email</ion-label>
+                                    <ion-input type="text" formControlName="audi_qahead_email"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        
+                        <ion-row>
+                            <ion-col color="primary" >
+                                Production Head
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Name</ion-label>
+                                    <ion-input type="text" formControlName="audi_productionhead_name"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Phone/Mobile Phone</ion-label>
+                                    <ion-input type="text" formControlName="audi_productionhead_phone"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Email</ion-label>
+                                    <ion-input type="text" formControlName="audi_productionhead_email"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        
+                        <ion-row>
+                            <ion-col color="primary" >
+                                RD Head
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Name</ion-label>
+                                    <ion-input type="text" formControlName="audi_rdhead_name"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Phone/Mobile Phone</ion-label>
+                                    <ion-input type="text" formControlName="audi_rdhead_phone"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Email</ion-label>
+                                    <ion-input type="text" formControlName="audi_rdhead_email"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        
+                        <ion-row>
+                            <ion-col color="primary" >
+                                Sales Head
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Name</ion-label>
+                                    <ion-input type="text" formControlName="audi_saleshead_name"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Phone/Mobile Phone</ion-label>
+                                    <ion-input type="text" formControlName="audi_saleshead_phone"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Email</ion-label>
+                                    <ion-input type="text" formControlName="audi_saleshead_email"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        
+                        <ion-row>
+                            <ion-col color="primary" >
+                                Contact Window 1
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Name</ion-label>
+                                    <ion-input type="text" formControlName="audi_contactwindow1_name"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Phone/Mobile Phone</ion-label>
+                                    <ion-input type="text" formControlName="audi_contactwindow1_phone"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Email</ion-label>
+                                    <ion-input type="text" formControlName="audi_contactwindow1_email"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        <ion-row>
+                            <ion-col color="primary" >
+                                Contact Window 2
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Name</ion-label>
+                                    <ion-input type="text" formControlName="audi_contactwindow2_name"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Phone/Mobile Phone</ion-label>
+                                    <ion-input type="text" formControlName="audi_contactwindow2_phone"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-item>
+                                    <ion-label floating>Email</ion-label>
+                                    <ion-input type="text" formControlName="audi_contactwindow2_email"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>1.9 Company's certification</ion-col>
+                    <ion-col>Rev.</ion-col>
+                    <ion-col>Certifying agency</ion-col>
+                    <ion-col>Date/Plan</ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>ISO9001</ion-col>
+                    <ion-col><ion-input type="text" placeholder="digite aqui"  formControlName="audi_iso9001_rev"></ion-input></ion-col>
+                    <ion-col><ion-input type="text" placeholder="digite aqui"  formControlName="audi_iso9001_certifyingagency"></ion-input></ion-col>
+                    <ion-col><ion-input type="text" placeholder="digite aqui"  formControlName="audi_iso9001_date_plan"></ion-input></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>ISO1401</ion-col>
+                    <ion-col><ion-input type="text" placeholder="digite aqui"  formControlName="audi_iso14001_rev"></ion-input></ion-col>
+                    <ion-col><ion-input type="text" placeholder="digite aqui"  formControlName="audi_iso14001_certifyingagency"></ion-input></ion-col>
+                    <ion-col><ion-input type="text" placeholder="digite aqui"  formControlName="audi_iso14001_date_plan"></ion-input></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>OHSAS18001</ion-col>
+                    <ion-col><ion-input type="text" placeholder="digite aqui"  formControlName="audi_ohsas18001_rev"></ion-input></ion-col>
+                    <ion-col><ion-input type="text" placeholder="digite aqui"  formControlName="audi_ohsas18001_certifyingagency"></ion-input></ion-col>
+                    <ion-col><ion-input type="text" placeholder="digite aqui"  formControlName="audi_ohsas18001_date_plan"></ion-input></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>SA8000</ion-col>
+                    <ion-col><ion-input type="text" placeholder="digite aqui"  formControlName="audi_sa8000_rev"></ion-input></ion-col>
+                    <ion-col><ion-input type="text" placeholder="digite aqui"  formControlName="audi_sa8000_certifyingagency"></ion-input></ion-col>
+                    <ion-col><ion-input type="text" placeholder="digite aqui"  formControlName="audi_sa8000_date_plan"></ion-input></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>Others</ion-col>
+                    <ion-col><ion-input type="text" placeholder="digite aqui"  formControlName="audi_others_rev"></ion-input></ion-col>
+                    <ion-col><ion-input type="text" placeholder="digite aqui"  formControlName="audi_others_certifyingagency"></ion-input></ion-col>
+                    <ion-col><ion-input type="text" placeholder="digite aqui"  formControlName="audi_others_date_plan"></ion-input></ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label floating>1.10 Date of company established</ion-label>
+                            <ion-input type="text"  formControlName="audi_date_company_established"></ion-input>
+                        </ion-item>                        
+                    </ion-col>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label floating>Date of operation began</ion-label>
+                            <ion-input type="text"  formControlName="audi_date_operation_began"></ion-input>
+                        </ion-item>                        
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label floating>1.11 Number of employees</ion-label>
+                            <ion-input type="text"  formControlName="audi_number_employees"></ion-input>
+                        </ion-item>                        
+                    </ion-col>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label floating>Shift</ion-label>
+                            <ion-input type="text"  formControlName="audi_shift"></ion-input>
+                        </ion-item>                        
+                    </ion-col>
+                </ion-row>
+                
+                <!-- <ion-row>
+                    <ion-col>
+                        <ion-row>
+                            <ion-col color="primary" >
+                                1.12 Facility Size
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <ion-item>
+                                    <ion-label floating>Total Área</ion-label>
+                                    <ion-input type="text" formControlName=""></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col>
+                                <ion-item>
+                                    <ion-label floating>Manufacturing/Operation area</ion-label>
+                                    <ion-input type="text" formControlName=""></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row> -->
+                
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label floating>1.13 Maximum capacity ( units/day)</ion-label>
+                            <ion-input type="text"  formControlName="audi_maximum_capacity"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label floating>1.14 Current capacity utilization (%)</ion-label>
+                            <ion-input type="text"  formControlName="audi_current_capacity_utilization"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row >
+                    <ion-col col-4>
+                        1.15 Top 3 customers (% of annual sale)
+                    </ion-col>
+                    <ion-col col-8>
+                        <ion-row>
+                            <ion-col>
+                                <ion-item>
+                                    <ion-label floating>1</ion-label>
+                                    <ion-input type="text"  formControlName="audi_customer1"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <ion-item>
+                                    <ion-label floating>2</ion-label>
+                                    <ion-input type="text"  formControlName="audi_customer2"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <ion-item>
+                                    <ion-label floating>3</ion-label>
+                                    <ion-input type="text"  formControlName="audi_customer3"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label floating>1.16 Expansion Plan</ion-label>
+                            <ion-input type="text" formControlName="audi_expansion_plan"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label floating>1.17 Employee Turnover (%)</ion-label>
+                            <ion-input type="text" formControlName="audi_employee_turnover"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col>
+                        <button type="submit" color="secondary" ion-button full [disabled]="!formGroup.valid">Cadastrar</button>
+                    </ion-col>
+                </ion-row>
+                
+            </ion-grid>
+        </form>
+    </ion-card>
+    
+</ion-content>
