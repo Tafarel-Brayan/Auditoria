@@ -9,7 +9,6 @@ import { AuthProvider } from '../providers/auth/auth';
 import { AuditoriaFormPage } from '../pages/auditoria-form/auditoria-form';
 import { LoginPage } from '../pages/login/login';
 import { LoginService } from '../pages/login/login.service';
-
 @Component({
   templateUrl: 'app.html'
 })
@@ -22,13 +21,13 @@ export class MyApp {
 
   nomeUser: string;
   nomeEmpresa: string;
-
   constructor(public platform: Platform, 
               public statusBar: StatusBar,
               public splashScreen: SplashScreen,
               public authProvider: AuthProvider,
               private storage: Storage,
               private loginService: LoginService
+
             ) {
     this.initializeApp();
          
@@ -67,7 +66,7 @@ export class MyApp {
   }
 
   logout(){
-    this.storage.clear();
+    this.authProvider.logout();
     this.nav.setRoot(LoginPage);
   }
 }

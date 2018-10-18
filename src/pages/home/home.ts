@@ -35,7 +35,11 @@ export class HomePage {
 		}
 		
 		ionViewCanEnter(){
-			this.authProvider.isLogged() !== undefined;
+			if(this.authProvider.isLogged() === null ){
+				this.navCtrl.setRoot(LoginPage);
+			}
+				
+			
 		}
 		
 	}
