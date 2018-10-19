@@ -16,6 +16,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ChecklistPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+    console.log('Passed params', navParams.get('audi_id'));
   }
 
   ionViewDidLoad() {

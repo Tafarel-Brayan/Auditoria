@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
-import { Storage } from '@ionic/storage';
 import { HomePage } from '../home/home';
 import { LoginService } from './login.service';
 
@@ -19,7 +18,6 @@ export class LoginPage {
 		public navParams: NavParams,
 		private formBuilder: FormBuilder,
 		public auth: AuthProvider,
-		private storage: Storage,
 		public toastCtrl: ToastController,
 		public loginService: LoginService
 		) {

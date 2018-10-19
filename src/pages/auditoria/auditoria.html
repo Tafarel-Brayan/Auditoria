@@ -1,5 +1,5 @@
 <ion-tabs>
-    <ion-tab [root]="summaryRoot" tabTitle="Summary" tabIcon="information-circle"></ion-tab>
-    <ion-tab [root]="checklistRoot" tabTitle="Checklist" tabIcon="information-circle"></ion-tab>
-    <ion-tab [root]="summaryAuditorRoot" tabTitle="Summary auditor" tabIcon="information-circle"></ion-tab>
+    <ion-tab [root]="summaryRoot"        tabTitle="Summary"         tabIcon="information-circle" [rootParams]="params"></ion-tab>
+    <ion-tab [root]="checklistRoot"      tabTitle="Checklist"       tabIcon="information-circle" [rootParams]="params"></ion-tab>
+    <ion-tab [root]="summaryAuditorRoot" tabTitle="Summary auditor" tabIcon="information-circle" [rootParams]="params"></ion-tab>
 </ion-tabs>
