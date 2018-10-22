@@ -7,12 +7,18 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Checklist</ion-title>
+    <ion-title>Processos Cheklist</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+	<ion-list>
+		<button ion-item *ngFor="let processo of processos" (click)="irParaItens(processo.aupr_proc_id)"  >
+			{{ processo.aupr_proc_name }}
+		</button>
+	</ion-list>
 
 </ion-content>

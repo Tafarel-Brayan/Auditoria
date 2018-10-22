@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the ChecklistPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AuditProcessInterface } from '../../providers/audit-process/audit-process-interface';
+import { AuditProcessProvider } from '../../providers/audit-process/audit-process';
+import { ItensChecklistPage } from '../itens-checklist/itens-checklist';
 
 @IonicPage()
 @Component({
@@ -15,13 +11,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ChecklistPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+	audi_id:number;
+	processos: AuditProcessInterface[];
 
-    console.log('Passed params', navParams.get('audi_id'));
-  }
+	constructor(public navCtrl: NavController,
+				public navParams: NavParams,
+				private auditProcessProvider: AuditProcessProvider) {
+	}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ChecklistPage');
-  }
+	ionViewDidLoad() {
+		this.audi_id = this.navParams.get('audi_id');
+		this.auditProcessProvider.getProcess(this.audi_id)
+		.subscribe(data => this.processos = data);
+	}
+
+	irParaItens(proc_id){
+		this.navCtrl.push(ItensChecklistPage, {
+			audi_id: this.audi_id,
+			proc_id: proc_id
+		});
+	}
 
 }

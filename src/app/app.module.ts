@@ -18,12 +18,20 @@ import { AuditoriaFormPage } from '../pages/auditoria-form/auditoria-form';
 import { AuditProvider } from '../providers/audit/audit';
 import { EmpresaProvider } from '../providers/empresa/empresa';
 import { LoginService } from '../pages/login/login.service';
+import { AuditProcessProvider } from '../providers/audit-process/audit-process';
+import { ItensChecklistPage } from '../pages/itens-checklist/itens-checklist';
+import { AuditCustomerCriteriaBondProvider } from '../providers/audit-customer-criteria-bond/audit-customer-criteria-bond';
+import { AuditCategoryProvider } from '../providers/audit-category/audit-category';
+import { AuditCustomerCriteriaProvider } from '../providers/audit-customer-criteria/audit-customer-criteria';
+
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     LoginPage,
-    AuditoriaFormPage
+    AuditoriaFormPage,
+    ItensChecklistPage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +45,8 @@ import { LoginService } from '../pages/login/login.service';
     MyApp,
     HomePage,
     LoginPage,
-    AuditoriaFormPage
+    AuditoriaFormPage,
+    ItensChecklistPage
   ],
   providers: [
     StatusBar,
@@ -47,7 +56,11 @@ import { LoginService } from '../pages/login/login.service';
     VwListAuditRespStatusProvider,
     AuditProvider,
     EmpresaProvider,
-    LoginService
+    LoginService,
+    AuditProcessProvider,
+    AuditCustomerCriteriaBondProvider,
+    AuditCategoryProvider,
+    AuditCustomerCriteriaProvider
 
   ]
 })
