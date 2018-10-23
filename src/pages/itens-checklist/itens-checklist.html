@@ -10,6 +10,6 @@
 <ion-content>
 	<ion-item-group *ngFor="let category of categoryCriterias" >
 		<ion-item-divider color="lightGrey">{{category.auca_cate_name}}</ion-item-divider>
-		<ion-item *ngFor="let item of category.customer_criterion" text-wrap >{{ item.aucc_cucr_custumer_criteria }}</ion-item>
+		<ion-item *ngFor="let item of category.customer_criterion" text-wrap (click)="auditar(item.aucc_cucr_id)"  >{{ item.aucc_cucr_custumer_criteria }}</ion-item>
 	</ion-item-group>
 </ion-content>

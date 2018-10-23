@@ -3,6 +3,8 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
+import { SelectSearchableModule } from 'ionic-select-searchable';
+
 import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
@@ -23,7 +25,8 @@ import { ItensChecklistPage } from '../pages/itens-checklist/itens-checklist';
 import { AuditCustomerCriteriaBondProvider } from '../providers/audit-customer-criteria-bond/audit-customer-criteria-bond';
 import { AuditCategoryProvider } from '../providers/audit-category/audit-category';
 import { AuditCustomerCriteriaProvider } from '../providers/audit-customer-criteria/audit-customer-criteria';
-
+import { AuditScoreProvider } from '../providers/audit-score/audit-score';
+import { AuditarItemFormPage } from '../pages/auditar-item-form/auditar-item-form';
 
 @NgModule({
   declarations: [
@@ -31,14 +34,16 @@ import { AuditCustomerCriteriaProvider } from '../providers/audit-customer-crite
     HomePage,
     LoginPage,
     AuditoriaFormPage,
-    ItensChecklistPage
+    ItensChecklistPage,
+    AuditarItemFormPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    AuditoriaPageModule
+    AuditoriaPageModule,
+    SelectSearchableModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -46,7 +51,8 @@ import { AuditCustomerCriteriaProvider } from '../providers/audit-customer-crite
     HomePage,
     LoginPage,
     AuditoriaFormPage,
-    ItensChecklistPage
+    ItensChecklistPage,
+    AuditarItemFormPage
   ],
   providers: [
     StatusBar,
@@ -60,7 +66,8 @@ import { AuditCustomerCriteriaProvider } from '../providers/audit-customer-crite
     AuditProcessProvider,
     AuditCustomerCriteriaBondProvider,
     AuditCategoryProvider,
-    AuditCustomerCriteriaProvider
+    AuditCustomerCriteriaProvider,
+    AuditScoreProvider
 
   ]
 })

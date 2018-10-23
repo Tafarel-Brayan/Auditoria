@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuditCustomerCriteriaBondProvider } from '../../providers/audit-customer-criteria-bond/audit-customer-criteria-bond';
 import { CategoryCriteriaInterface } from '../../providers/audit-customer-criteria-bond/category-criteria-interface';
+import { AuditarItemFormPage } from '../auditar-item-form/auditar-item-form';
 
 @IonicPage()
 @Component({
@@ -19,16 +20,24 @@ export class ItensChecklistPage {
 				private accbProvider: AuditCustomerCriteriaBondProvider) {
 	}
 
-  ionViewDidLoad() {
+    ionViewDidLoad() {
 	
-	this.audi_id = this.navParams.get('audi_id');
-	this.proc_id = this.navParams.get('proc_id');
-	this.accbProvider.getCategoryItemByAudit(this.audi_id, this.proc_id)
-		.subscribe(
-			 (data) => {
-				 this.categoryCriterias = data;
-			 }
-		);
-  }
+		this.audi_id = this.navParams.get('audi_id');
+		this.proc_id = this.navParams.get('proc_id');
+		this.accbProvider.getCategoryItemByAudit(this.audi_id, this.proc_id)
+			.subscribe(
+				(data) => {
+					this.categoryCriterias = data;
+				}
+			);
+    }
+
+    auditar(aucc_cucr_id){
+		this.navCtrl.push(AuditarItemFormPage,{
+			audi_id:this.audi_id,
+			proc_id:this.proc_id,
+			aucc_cucr_id:aucc_cucr_id
+		})
+    }
 
 }

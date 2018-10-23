@@ -1,0 +1,60 @@
+<!--
+    Generated template for the AuditarItemFormPage page.
+    
+    See http://ionicframework.com/docs/components/#navigation for more info on
+    Ionic pages and navigation.
+-->
+<ion-header>
+    
+    <ion-navbar>
+        <ion-title>Auditar</ion-title>
+    </ion-navbar>
+    
+</ion-header>
+
+
+<ion-content>
+    <ion-card>
+        <ion-list>
+            <ion-item>
+                <ion-label floating>Reference Document</ion-label>
+                <ion-input type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Remark</ion-label>
+                <ion-input type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Department</ion-label>
+                <ion-input type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Owner</ion-label>
+                <ion-input type="text"></ion-input>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label>Users</ion-label>
+                <select-searchable
+                    item-content
+                    [(ngModel)]="user"
+                    [items]="users"
+                    itemValueField="id"
+                    itemTextField="name"
+                    [canSearch]="true"
+                    (onChange)="userChanged($event)">
+                </select-searchable>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Action</ion-label>
+                <ion-input type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Score</ion-label>
+                <ion-input type="text"></ion-input>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+    
+</ion-content>
