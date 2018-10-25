@@ -27,6 +27,8 @@ import { AuditCategoryProvider } from '../providers/audit-category/audit-categor
 import { AuditCustomerCriteriaProvider } from '../providers/audit-customer-criteria/audit-customer-criteria';
 import { AuditScoreProvider } from '../providers/audit-score/audit-score';
 import { AuditarItemFormPage } from '../pages/auditar-item-form/auditar-item-form';
+import { VwOwnerProvider } from '../providers/vw-owner/vw-owner';
+import { VwAuditScoreProvider } from '../providers/vw-audit-score/vw-audit-score';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { AuditarItemFormPage } from '../pages/auditar-item-form/auditar-item-for
     AuditCustomerCriteriaBondProvider,
     AuditCategoryProvider,
     AuditCustomerCriteriaProvider,
-    AuditScoreProvider
+    AuditScoreProvider,
+    VwOwnerProvider,
+    VwAuditScoreProvider
 
   ]
 })
