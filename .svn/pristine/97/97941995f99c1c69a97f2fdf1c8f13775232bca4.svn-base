@@ -1,0 +1,7 @@
+{
+  "name": "auditor",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

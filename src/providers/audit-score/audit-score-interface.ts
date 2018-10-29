@@ -1,5 +1,6 @@
 export interface AuditScoreInterface{
     audi_id: number,
+    ausc_id: number,
     aupr_proc_seq: number,
     aupr_proc_id: number,
     aupr_proc_name: string,

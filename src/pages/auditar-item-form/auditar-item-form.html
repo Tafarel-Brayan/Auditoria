@@ -6,60 +6,62 @@
 
 <ion-content>
     <ion-card>
-
+        
         <ion-item *ngIf="_auditScoreInterface" text-wrap color="lightGrey" >
             <h2>{{ _auditScoreInterface.audc_crit_criterion }} <small>({{ _auditScoreInterface.auca_cate_name }})</small></h2>
             <p>{{ _auditScoreInterface.aucc_cucr_custumer_criteria }}</p>
         </ion-item>
-
+        
         <form [formGroup]="_formGroup" (ngSubmit)="auditar()"  >
-
+            
             <ion-list>
-    
+                
                 <ion-item>
                     <ion-label floating>Reference Document</ion-label>
                     <ion-input formControlName="ausc_reference_document" type="text"></ion-input>
                 </ion-item>
-    
+                
                 <ion-item>
                     <ion-label floating>Remark</ion-label>
                     <ion-input formControlName="ausc_remark" type="text"></ion-input>
                 </ion-item>
-    
+                
                 <ion-item>
                     <ion-label floating>Department</ion-label>
-                    <ion-input  formControlName="ausc_department" type="text"></ion-input>
+                    <ion-select formControlName="ausc_department" [selectOptions]="{title: 'Setores', subTitle: 'Selecione um'}">
+                        <ion-option *ngFor="let setor of _setores" value="setor.codigo">{{ setor.setor }}</ion-option>
+                    </ion-select>
                 </ion-item>
-    
+                
                 <ion-item>
                     <ion-label floating>Owner</ion-label>
                     <select-searchable  formControlName="ausc_owner" *ngIf="_owners" 
-                        item-content
-                        [(ngModel)]="_owner"
-                        [items]="_owners"
-                        itemValueField="usua_id"
-                        itemTextField="usua_nome"
-                        [canSearch]="true"
-                        (onChange)="ownerChanged($event)">
-                    </select-searchable>
-                </ion-item>
-    
-                <ion-item>
-                    <ion-label floating>Action</ion-label>
-                    <ion-input formControlName="ausc_action"  type="text"></ion-input>
-                </ion-item>
-    
-                <ion-item>
-                    <ion-label floating>Score</ion-label>
-                    <ion-toggle formControlName="ausc_score" color="primary"></ion-toggle>
-                </ion-item>
-                
-                <ion-item>
-                    <button type="submit" color="primary" ion-button full [disabled]="!_formGroup.valid">Cadastrar</button>
-                </ion-item>
-                
-            </ion-list>
-        </form>
-    </ion-card>
-    
+                    item-content
+                    [(ngModel)]="_owner"
+                    [items]="_owners"
+                    itemValueField="usua_id"
+                    itemTextField="usua_nome"
+                    [canSearch]="true"
+                    (onChange)="ownerChanged($event)">
+                </select-searchable>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label floating>Action</ion-label>
+                <ion-input formControlName="ausc_action"  type="text"></ion-input>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label floating>Score</ion-label>
+                <ion-toggle formControlName="ausc_score" color="primary"></ion-toggle>
+            </ion-item>
+            
+            <ion-item>
+                <button type="submit" color="primary" ion-button full [disabled]="!_formGroup.valid">Cadastrar</button>
+            </ion-item>
+            
+        </ion-list>
+    </form>
+</ion-card>
+
 </ion-content>

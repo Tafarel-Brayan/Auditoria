@@ -1,0 +1,7 @@
+page-auditoria-form {
+
+    .col{
+        border-bottom: 1px solid #f3f4f5;
+    }
+
+}

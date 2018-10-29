@@ -8,6 +8,8 @@ import { VwOwnerProvider } from './../../providers/vw-owner/vw-owner';
 import { VwOwnerInterface } from './../../providers/vw-owner/vw-owner-interface';
 import { AuditScoreProvider } from './../../providers/audit-score/audit-score';
 import { AuditScoreInterface } from './../../providers/audit-score/audit-score-interface';
+import { SetorInterface } from '../../providers/setor/setor-interface';
+import { SetorProvider } from '../../providers/setor/setor';
 
 
 @IonicPage()
@@ -20,6 +22,7 @@ export class AuditarItemFormPage {
        
     @ViewChild('myselect') selectComponent:SelectSearchableComponent;
 
+    _setores: SetorInterface[];
     _auditScoreInterface:AuditScoreInterface;
     _owner: VwOwnerInterface;
     _owners: VwOwnerInterface[];
@@ -32,6 +35,7 @@ export class AuditarItemFormPage {
                 public navParams: NavParams,
                 private vwOwnerProvider: VwOwnerProvider,
                 private auditScoreProvider: AuditScoreProvider,
+                private setorProvider: SetorProvider,
                 private formBuilder: FormBuilder ) {
 
             this._formGroup = this.formBuilder.group({
@@ -64,6 +68,9 @@ export class AuditarItemFormPage {
         this.vwOwnerProvider.findAll().subscribe(
             data => this._owners = data
         );
+
+        this.setorProvider.findAll()
+        .subscribe(data => this._setores = data );
 
         this.auditScoreProvider.findAuditScore(this._audi_id, this._proc_id, this._cucr_id)
         .subscribe(
@@ -102,20 +109,23 @@ export class AuditarItemFormPage {
                             keyOwner = key;
                         }
                     }
-                    this._owner = this._owners[keyOwner];
 
+                    this._owner = this._owners[keyOwner];
                     this._formGroup.controls['ausc_action'].setValue(this._auditScoreInterface.ausc_action_lenovo);
                     this._formGroup.controls['ausc_score'].setValue(this._auditScoreInterface.ausc_score_lenovo);
 
                 }
-
             }
         )
-        
     }
 
     auditar(){
-
+        this.auditScoreProvider.putItem(this._formGroup.value, this._auditScoreInterface.ausc_id)
+        .subscribe(
+            data => console.log(data),
+            err => console.log(err),
+            () => console.log('complete')
+        )
     }
     
 }

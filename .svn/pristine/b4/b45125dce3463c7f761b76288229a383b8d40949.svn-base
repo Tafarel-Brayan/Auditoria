@@ -1,0 +1,40 @@
+<ion-header>
+	<ion-navbar>
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>Home</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding >
+	
+	<ion-card>
+
+		<ion-card-header>
+			Lista de Auditoria
+		</ion-card-header>
+
+		<ion-card-content>
+			<ion-grid *ngIf="dataHome">
+				<ion-row>
+				  <ion-col col-2 ><strong>Id</strong></ion-col>
+				  <ion-col col-3><strong>Auditor Digiboard</strong></ion-col>
+				  <ion-col col-2><strong>Status Dgb</strong></ion-col>
+				  <ion-col col-3><strong>Auditor Lenovo</strong></ion-col>
+				  <ion-col col-2><strong>Status Lenovo</strong></ion-col>
+				</ion-row>
+				<ion-row (click)="auditar( item.audi_id )" *ngFor="let item of dataHome" >
+					<ion-col col-2 >{{ item.audi_id }}</ion-col>
+					<ion-col col-3>{{ item.usua_nome_dgb }}</ion-col>
+					<ion-col col-2>{{ item.audit_1 }} </ion-col>
+					<ion-col col-3>{{ item.usua_nome_lenovo }}</ion-col>
+					<ion-col col-2>{{ item.audit_2 }}</ion-col>
+				  </ion-row>
+			  </ion-grid>
+		</ion-card-content>
+
+	</ion-card>
+
+
+</ion-content>
