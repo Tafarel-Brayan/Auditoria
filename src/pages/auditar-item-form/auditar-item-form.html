@@ -27,41 +27,42 @@
                 </ion-item>
                 
                 <ion-item>
-                    <ion-label floating>Department</ion-label>
-                    <ion-select formControlName="ausc_department" [selectOptions]="{title: 'Setores', subTitle: 'Selecione um'}">
-                        <ion-option *ngFor="let setor of _setores" value="setor.codigo">{{ setor.setor }}</ion-option>
+                    <ion-label floating *ngIf="_setores"  >Department</ion-label>
+                    <ion-select formControlName="ausc_department" [selectOptions]="{title: 'Setores', subTitle: 'Selecione um'}" cancelText="Cancelar" okText="Ok" >
+                        <ion-option *ngFor="let setor of _setores" [value]="setor.codigo">{{ setor.setor }}</ion-option>
                     </ion-select>
                 </ion-item>
                 
                 <ion-item>
                     <ion-label floating>Owner</ion-label>
                     <select-searchable  formControlName="ausc_owner" *ngIf="_owners" 
-                    item-content
-                    [(ngModel)]="_owner"
-                    [items]="_owners"
-                    itemValueField="usua_id"
-                    itemTextField="usua_nome"
-                    [canSearch]="true"
-                    (onChange)="ownerChanged($event)">
-                </select-searchable>
-            </ion-item>
-            
-            <ion-item>
-                <ion-label floating>Action</ion-label>
-                <ion-input formControlName="ausc_action"  type="text"></ion-input>
-            </ion-item>
-            
-            <ion-item>
-                <ion-label floating>Score</ion-label>
-                <ion-toggle formControlName="ausc_score" color="primary"></ion-toggle>
-            </ion-item>
-            
-            <ion-item>
-                <button type="submit" color="primary" ion-button full [disabled]="!_formGroup.valid">Cadastrar</button>
-            </ion-item>
-            
-        </ion-list>
-    </form>
-</ion-card>
+                        item-content
+                        [(ngModel)]="_owner"
+                        [items]="_owners"
+                        itemValueField="usua_id"
+                        itemTextField="usua_nome"
+                        [canSearch]="true"
+                        (onChange)="ownerChanged($event)">
+                    </select-searchable>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-label floating>Action</ion-label>
+                    <ion-input formControlName="ausc_action"  type="text"></ion-input>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-label>Score</ion-label>
+
+                    <ion-toggle formControlName="ausc_score" color="primary" checked="{{ _score }}"></ion-toggle>
+                </ion-item>
+                
+                <ion-item>
+                    <button type="submit" color="primary" ion-button full [disabled]="!_formGroup.valid">Cadastrar</button>
+                </ion-item>
+                
+            </ion-list>
+        </form>
+    </ion-card>
 
 </ion-content>

@@ -12,7 +12,7 @@ export interface AuditScoreInterface{
     ausc_reference_document_lenovo: string,
     ausc_score_lenovo: number,
     ausc_remark_lenovo: string,
-    ausc_department_lenovo: number,
+    ausc_department_lenovo: string,
     ausc_owner_lenovo_id: number,
     ausc_owner_lenovo: string,
     ausc_action_lenovo: string,
