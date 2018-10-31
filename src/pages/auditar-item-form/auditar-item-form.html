@@ -8,8 +8,11 @@
     <ion-card>
         
         <ion-item *ngIf="_auditScoreInterface" text-wrap color="lightGrey" >
-            <h2>{{ _auditScoreInterface.audc_crit_criterion }} <small>({{ _auditScoreInterface.auca_cate_name }})</small></h2>
-            <p>{{ _auditScoreInterface.aucc_cucr_custumer_criteria }}</p>
+            <p><strong>Id Audit</strong>: {{ _auditScoreInterface.audi_id }}  </p>
+            <p><strong>Process: </strong> {{ _auditScoreInterface.aupr_proc_name }} </p>
+            <p><strong>Category:</strong> {{ _auditScoreInterface.auca_cate_name }}</p>
+            <p><strong>Criterion: </strong> {{ _auditScoreInterface.audc_crit_criterion }} </p>
+            <p><strong>Customer: Criterion:</strong> {{ _auditScoreInterface.aucc_cucr_custumer_criteria }} </p>
         </ion-item>
         
         <form [formGroup]="_formGroup" (ngSubmit)="auditar()"  >

@@ -19,7 +19,7 @@ export class ChecklistPage {
 				private auditProcessProvider: AuditProcessProvider) {
 	}
 
-	ionViewDidLoad() {
+	ionViewDidEnter() {
 		this.audi_id = this.navParams.get('audi_id');
 		this.auditProcessProvider.getProcess(this.audi_id)
 		.subscribe(data => this.processos = data);

@@ -19,8 +19,7 @@ import 'rxjs/add/operator/map';
     templateUrl: 'auditar-item-form.html',
 })
 export class AuditarItemFormPage {
-    
-       
+
     @ViewChild('myselect') selectComponent:SelectSearchableComponent;
 
     _setores: SetorInterface[];
@@ -29,7 +28,7 @@ export class AuditarItemFormPage {
     _owners: VwOwnerInterface[];
     _audi_id:number;
     _proc_id: number;
-    _cucr_id:number;
+    _aucc_id:number;
     _formGroup: FormGroup;
     _score:boolean = false;
 
@@ -47,7 +46,7 @@ export class AuditarItemFormPage {
                 ausc_department:['', Validators.required],
                 ausc_owner:['', Validators.required],
                 ausc_action:['', Validators.required],
-                ausc_score:['', Validators.required],
+                ausc_score:[''],
                 empresa:[sessionStorage.getItem('usem_empr_id')]
             });
 
@@ -64,7 +63,7 @@ export class AuditarItemFormPage {
     ionViewDidEnter() {
 
         this._audi_id = this.navParams.get('audi_id');
-        this._cucr_id = this.navParams.get('aucc_cucr_id');
+        this._aucc_id = this.navParams.get('aucc_id');
         this._proc_id = this.navParams.get('proc_id');
 
 
@@ -78,7 +77,7 @@ export class AuditarItemFormPage {
             err => console.log(err),
             () => {
 
-                this.auditScoreProvider.findAuditScore(this._audi_id, this._proc_id, this._cucr_id)
+                this.auditScoreProvider.findAuditScore(this._audi_id, this._proc_id, this._aucc_id)
                 .subscribe(
                     data => {
                         this._auditScoreInterface = data;
@@ -92,13 +91,13 @@ export class AuditarItemFormPage {
                             this._formGroup.controls['ausc_reference_document'].setValue(this._auditScoreInterface.ausc_reference_document_digiboard);
                             this._formGroup.controls['ausc_remark'].setValue(this._auditScoreInterface.ausc_remark_digiboard);
                             
-                            if(this._auditScoreInterface.ausc_department_digiboard != null && this._auditScoreInterface.ausc_department_digiboard != ''){
-                                let z = this._setores.map(e => e.setor).indexOf(this._auditScoreInterface.ausc_department_digiboard);
+                            if(this._auditScoreInterface.department_name_digiboard != null && this._auditScoreInterface.department_name_digiboard != ''){
+                                let z = this._setores.map(e => e.setor).indexOf(this._auditScoreInterface.department_name_digiboard);
                                 this._formGroup.controls['ausc_department'].setValue(this._setores[z].codigo);
                             }
         
                             for(let key in this._owners){
-                                if(this._owners[key]['usua_id'] == this._auditScoreInterface.ausc_owner_digiboard_id){
+                                if(this._owners[key]['usua_id'] == this._auditScoreInterface.ausc_owner_digiboard){
                                     keyOwner = key;
                                 }
                             }
@@ -107,12 +106,10 @@ export class AuditarItemFormPage {
                             this._formGroup.controls['ausc_action'].setValue(this._auditScoreInterface.ausc_action_digiboard);
                             this._formGroup.controls['ausc_score'].setValue(this._auditScoreInterface.ausc_score_digiboard);
                             
-                            console.log(this._auditScoreInterface.ausc_score_digiboard);
+                            
                             if(this._auditScoreInterface.ausc_score_digiboard == 1){
-                                console.log("true");
                                 this._score = true;
                             }else{
-                                console.log("false");
                                 this._score = false;
                             }
 
@@ -122,13 +119,13 @@ export class AuditarItemFormPage {
                             this._formGroup.controls['ausc_reference_document'].setValue(this._auditScoreInterface.ausc_reference_document_lenovo);
                             this._formGroup.controls['ausc_remark'].setValue(this._auditScoreInterface.ausc_remark_lenovo);
 
-                            if(this._auditScoreInterface.ausc_department_lenovo != null && this._auditScoreInterface.ausc_department_lenovo != ''){
-                                let z = this._setores.map(e => e.setor).indexOf(this._auditScoreInterface.ausc_department_lenovo);
+                            if(this._auditScoreInterface.department_name_lenovo != null && this._auditScoreInterface.department_name_lenovo != ''){
+                                let z = this._setores.map(e => e.setor).indexOf(this._auditScoreInterface.department_name_lenovo);
                                 this._formGroup.controls['ausc_department'].setValue(this._setores[z].codigo);
                             }
 
                             for(let key in this._owners){
-                                if(this._owners[key]['usua_id'] == this._auditScoreInterface.ausc_owner_lenovo_id){
+                                if(this._owners[key]['usua_id'] == this._auditScoreInterface.ausc_owner_lenovo){
                                     keyOwner = key;
                                 }
                             }
@@ -146,11 +143,13 @@ export class AuditarItemFormPage {
     }
 
     auditar(){
+
         this.auditScoreProvider.putItem(this._formGroup.value, this._auditScoreInterface.ausc_id)
         .subscribe(
             data => console.log(data),
             err => {
-                this.showToast("Algo deu errado, tente novamente!", 3000, "bottom");
+                this.showToast("Algo deu errado, tente novamente!", 5000, "bottom");
+                console.log(err);
             },
             () => {
                 this.showToast("Auditado Com Sucesso", 3000, "bottom");

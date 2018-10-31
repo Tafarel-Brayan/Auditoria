@@ -12,12 +12,13 @@ export class AuditScoreProvider {
   constructor(public http: Http) {
   }
 
-  findAuditScore(audi_id, proc_id, ausc_accb_cucb_cucr_id):Observable<AuditScoreInterface>{
-    return this.http.get(`${Utils.WERBSERVICE}/auditscore/findauditscore/ausc_audi_id/${audi_id}/ausc_accb_cucb_proc_id/${proc_id}/ausc_accb_cucb_cucr_id/${ausc_accb_cucb_cucr_id}`)
+  findAuditScore(audi_id, proc_id, aucc_id):Observable<AuditScoreInterface>{
+    return this.http.get(`${Utils.WERBSERVICE}/auditscore/findauditscore/audi_id/${audi_id}/aupr_id/${proc_id}/aucc_id/${aucc_id}`)
     .map( ( res: Response ) => res.json() );
   }
 
   putItem(form, id){
+    //return this.http.put(`${Utils.WERBSERVICE}/api/auditscore/${id}`, form);
     return this.http.put(`${Utils.WERBSERVICE}/auditscore/update/id/${id}`, form);
   }
 

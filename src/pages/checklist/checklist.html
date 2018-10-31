@@ -1,24 +1,35 @@
 <!--
-  Generated template for the ChecklistPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
+    Generated template for the ChecklistPage page.
+    
+    See http://ionicframework.com/docs/components/#navigation for more info on
+    Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Processos Cheklist</ion-title>
-  </ion-navbar>
-
+    
+    <ion-navbar>
+        <ion-title>Processos Cheklist</ion-title>
+    </ion-navbar>
+    
 </ion-header>
 
 
 <ion-content>
-
+    
 	<ion-list>
-		<button ion-item *ngFor="let processo of processos" (click)="irParaItens(processo.aupr_proc_id)"  >
-			{{ processo.aupr_proc_name }}
-		</button>
-	</ion-list>
+        <ion-item-divider color="lightGrey">
+            LEGENDA: <br>
+                <ion-badge color="secondary"><strong>Digiboard</strong></ion-badge> | 
+             <ion-badge color="danger" ><strong>Lenovo</strong></ion-badge>
 
+        </ion-item-divider>
+        <ion-item *ngFor="let processo of processos" (click)="irParaItens(processo.aupr_id)">
+            
+            {{ processo.aupr_proc_name }}
+
+            <ion-badge item-end color="secondary">{{ processo.auditados_digiboard }}/{{processo.ausc_score_digiboard}}</ion-badge>
+            <ion-badge item-end color="danger" >{{ processo.auditados_lenovo }}/{{processo.ausc_score_digiboard}}</ion-badge>
+
+        </ion-item>
+	</ion-list>
+    
 </ion-content>
