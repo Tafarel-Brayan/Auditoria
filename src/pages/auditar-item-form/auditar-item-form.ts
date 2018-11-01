@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SelectSearchableComponent } from 'ionic-select-searchable';
@@ -38,7 +38,8 @@ export class AuditarItemFormPage {
                 private auditScoreProvider: AuditScoreProvider,
                 private setorProvider: SetorProvider,
                 private formBuilder: FormBuilder ,
-                private toastCtrl: ToastController) {
+                private toastCtrl: ToastController,
+                private loadingCtrl: LoadingController) {
 
             this._formGroup = this.formBuilder.group({
                 ausc_reference_document:['', Validators.required],
@@ -144,20 +145,39 @@ export class AuditarItemFormPage {
 
     auditar(){
 
+        const load = this.loadingCtrl.create({
+            content: "Auditando..."
+        })
+        load.present();
+
         this.auditScoreProvider.putItem(this._formGroup.value, this._auditScoreInterface.ausc_id)
         .subscribe(
-            data => console.log(data),
+
+            data => '',
             err => {
                 this.showToast("Algo deu errado, tente novamente!", 5000, "bottom");
                 console.log(err);
             },
             () => {
-                this.showToast("Auditado Com Sucesso", 3000, "bottom");
-                setTimeout(() => {
+                
+                setTimeout(()=>{
+                    load.dismiss();
+                    this.showToast("Item auditado com sucesso", 3000, "bottom");
                     this.navCtrl.pop();
-                }, 3000);
+                }, 1500);
+
             }
         )
+    }
+
+
+    showLoader(){
+        const loader = this.loadingCtrl.create({
+            content: "Auditando.."
+        })
+
+        loader.present();
+
     }
 
 

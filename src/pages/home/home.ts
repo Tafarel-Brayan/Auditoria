@@ -13,6 +13,7 @@ import { VwListAuditRespStatusProvider } from '../../providers/vw-list-audit-res
 export class HomePage {
 	
 	dataHome: HomeInterface[];
+	_empresa:string = sessionStorage.getItem('usem_empr_id');
 
 	constructor(public navCtrl: NavController,
 		public authProvider: AuthProvider,

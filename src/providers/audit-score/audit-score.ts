@@ -17,8 +17,12 @@ export class AuditScoreProvider {
     .map( ( res: Response ) => res.json() );
   }
 
+  getTotal(audi_id, empresa):Observable<any>{
+    return this.http.get(`${Utils.WERBSERVICE}/auditscore/gettotal/audi_id/${audi_id}/empresa/${empresa}`)
+    .map( (res:Response) => res.json() );
+  }
+
   putItem(form, id){
-    //return this.http.put(`${Utils.WERBSERVICE}/api/auditscore/${id}`, form);
     return this.http.put(`${Utils.WERBSERVICE}/auditscore/update/id/${id}`, form);
   }
 

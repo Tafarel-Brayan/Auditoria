@@ -16,20 +16,20 @@
 <ion-content>
     
 	<ion-list>
-        <ion-item-divider color="lightGrey">
-            LEGENDA: <br>
-                <ion-badge color="secondary"><strong>Digiboard</strong></ion-badge> | 
-             <ion-badge color="danger" ><strong>Lenovo</strong></ion-badge>
+        <ion-item-divider color="darkGrey" *ngIf="_concluirAuditoria"  >
+
+            <button ion-button item-end color="primary" (click)="concluirAuditoria()">
+                Concluir Auditoria
+            </button>
 
         </ion-item-divider>
+        
         <ion-item *ngFor="let processo of processos" (click)="irParaItens(processo.aupr_id)">
-            
             {{ processo.aupr_proc_name }}
-
-            <ion-badge item-end color="secondary">{{ processo.auditados_digiboard }}/{{processo.ausc_score_digiboard}}</ion-badge>
-            <ion-badge item-end color="danger" >{{ processo.auditados_lenovo }}/{{processo.ausc_score_digiboard}}</ion-badge>
-
+            <ion-badge item-end color="secondary" *ngIf="_empresa == 1">{{ processo.auditados_digiboard }}/{{processo.ausc_score_digiboard}}</ion-badge>
+            <ion-badge item-end color="danger"    *ngIf="_empresa != 1">{{ processo.auditados_lenovo }}/{{processo.ausc_score_digiboard}}</ion-badge>
         </ion-item>
+
 	</ion-list>
     
 </ion-content>

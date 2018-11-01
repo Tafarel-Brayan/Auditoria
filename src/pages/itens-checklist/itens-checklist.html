@@ -13,8 +13,11 @@
 		<ion-item *ngFor="let item of category.customer_criterion" text-wrap (click)="auditar(item.aucc_id)"  >
 			{{ item.aucc_cucr_custumer_criteria }}
 			
-			<ion-badge *ngIf="_empresa  == 1 && item.ausc_score_digiboard != null" color="primary" item-end><ion-icon name="checkmark"></ion-icon></ion-badge>
-			<ion-badge *ngIf="_empresa  != 1 && item.ausc_score_lenovo != null" color="danger" item-end><ion-icon name="checkmark"></ion-icon></ion-badge>
+			<ion-badge *ngIf="_empresa  == 1 && item.ausc_score_digiboard == 1" color="primary" item-end><ion-icon name="thumbs-up"></ion-icon></ion-badge>
+			<ion-badge *ngIf="_empresa  == 1 && item.ausc_score_digiboard == 0" color="dark" item-end><ion-icon name="thumbs-down"></ion-icon></ion-badge>
+			
+			<ion-badge *ngIf="_empresa  != 1 && item.ausc_score_lenovo == 1" color="primary" item-end><ion-icon name="thumbs-up"></ion-icon></ion-badge>
+			<ion-badge *ngIf="_empresa  != 1 && item.ausc_score_lenovo == 0" color="danger" item-end><ion-icon name="thumbs-down"></ion-icon></ion-badge>
 
 		</ion-item>
 	</ion-item-group>

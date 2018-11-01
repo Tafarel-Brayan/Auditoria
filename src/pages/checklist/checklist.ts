@@ -1,8 +1,15 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+
+import { ItensChecklistPage } from '../itens-checklist/itens-checklist';
+
 import { AuditProcessInterface } from '../../providers/audit-process/audit-process-interface';
 import { AuditProcessProvider } from '../../providers/audit-process/audit-process';
-import { ItensChecklistPage } from '../itens-checklist/itens-checklist';
+
+import { AuditScoreProvider } from './../../providers/audit-score/audit-score';
+import { AuditProvider } from './../../providers/audit/audit';
+
+import { HomePage } from './../home/home';
 
 @IonicPage()
 @Component({
@@ -13,16 +20,34 @@ export class ChecklistPage {
 
 	audi_id:number;
 	processos: AuditProcessInterface[];
+	_empresa:string = sessionStorage.getItem('usem_empr_id');
+	_concluirAuditoria:boolean = false;
 
 	constructor(public navCtrl: NavController,
 				public navParams: NavParams,
-				private auditProcessProvider: AuditProcessProvider) {
+				private auditProcessProvider: AuditProcessProvider,
+				private auditScoreProvider: AuditScoreProvider,
+				private auditProvider: AuditProvider,
+				private toastCtrl: ToastController,
+				private loadingCtrl: LoadingController) {
 	}
-
+	
 	ionViewDidEnter() {
 		this.audi_id = this.navParams.get('audi_id');
+
+		this.auditScoreProvider.getTotal(this.audi_id, this._empresa)
+			.subscribe(
+				data => {
+					if(this._empresa == '1'){
+						this._concluirAuditoria = (data.total == data.total_digiboard) ? true : false;
+					}else{
+						this._concluirAuditoria = (data.total == data.total_lenovo) ? true : false;
+					}
+				}
+			);
+
 		this.auditProcessProvider.getProcess(this.audi_id)
-		.subscribe(data => this.processos = data);
+			.subscribe(data => this.processos = data);
 	}
 
 	irParaItens(proc_id){
@@ -32,4 +57,39 @@ export class ChecklistPage {
 		});
 	}
 
+	concluirAuditoria(){
+		let loader = this.loadingCtrl.create({
+			content: 'Aguarde...'
+		});
+
+		loader.present();
+
+		this.auditProvider.concluirAuditoria(this.audi_id, this._empresa)
+		.subscribe(
+			data=>{
+			},
+			err => {
+				this.showToast(err, 3000, 'bottom');
+			},
+			() => {
+				setTimeout(()=>{
+					loader.dismiss();
+					this.showToast('Auditoria Finalizada com Sucesso!', 3000, 'bottom');
+					this.navCtrl.setRoot(HomePage)
+				}, 1500);
+			}
+		);
+
+	}
+
+	showToast(m, d, p){
+		
+		let toast = this.toastCtrl.create({
+			message: m,
+			duration: d,
+			position: p
+		});
+
+		toast.present();
+	}
 }
