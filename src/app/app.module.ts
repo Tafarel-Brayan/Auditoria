@@ -2,16 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
 import { SelectSearchableModule } from 'ionic-select-searchable';
-
 import { IonicStorageModule } from '@ionic/storage';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { HeaderColor } from '@ionic-native/header-color';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+
 import { LoginPage } from '../pages/login/login';
 import { AuditoriaPageModule } from '../pages/auditoria/auditoria.module';
 import { AuthProvider } from '../providers/auth/auth';
@@ -60,6 +60,7 @@ import { SetorProvider } from '../providers/setor/setor';
   providers: [
     StatusBar,
     SplashScreen,
+    HeaderColor,
     AuthProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     VwListAuditRespStatusProvider,
