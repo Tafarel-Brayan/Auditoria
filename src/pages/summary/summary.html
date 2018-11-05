@@ -14,9 +14,19 @@
 
 
 <ion-content class="card-background-page">
+
+    <ion-card class="border-top-warning" >
+        <ion-card-header text-center>
+            Self Actual <small>(CLOSED)</small>
+        </ion-card-header>
+        <ion-card-content>
+            <canvas #radarCanvas></canvas>
+        </ion-card-content>
+    </ion-card>
+    
     <ion-card class="border-top-primary" >
         <ion-card-content>
-
+            
             <ion-row>
                 <ion-col col-4><strong><small>Requirement</small></strong></ion-col>
                 <ion-col col-2 text-center ><strong><small>Open</small></strong></ion-col>
@@ -24,7 +34,7 @@
                 <ion-col col-2 text-center ><strong><small>Total</small></strong></ion-col>
                 <ion-col col-2 text-center ><strong><small>% Closed</small></strong></ion-col>
             </ion-row>
-        
+            
             <div *ngFor="let item of _summary" >
                 <ion-row>
                     <ion-col col-4 > {{ item.aupr_proc_name }} </ion-col>
@@ -34,7 +44,18 @@
                     <ion-col col-2 text-center > {{ item.percent | number:0 }}% </ion-col>
                 </ion-row>
             </div>
+            
+        </ion-card-content>
+    </ion-card>
 
+    <ion-card class="border-top-secondary">
+        <ion-card-header>
+            Audit Judgement
+        </ion-card-header>
+        <ion-card-content>
+            <h2>
+                {{ _resultScore }}
+            </h2>
         </ion-card-content>
     </ion-card>
     

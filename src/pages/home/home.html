@@ -1,5 +1,5 @@
 <ion-header>
-	<ion-navbar>
+	<ion-navbar color="primary" >
 		<button ion-button menuToggle>
 			<ion-icon name="menu"></ion-icon>
 		</button>
@@ -29,12 +29,11 @@
 				
 				<div *ngFor="let item of dataHome">
 
-					<ion-row (click)="auditar( item.audi_id )" *ngIf="(_empresa == 1 && item.lenovo_apto == 0) || (_empresa !=1 && item.lenovo_apto == 1)" >
+					<ion-row (click)="auditar( item.audi_id )">
+						
 						<ion-col col-2 >{{ item.audi_id }}</ion-col>
-
 						<ion-col col-8 *ngIf="_empresa == 1"> {{ item.usua_nome_dgb }} </ion-col>
 						<ion-col col-2 *ngIf="_empresa == 1"> {{ item.audit_1 }} </ion-col>
-						
 						<ion-col col-8 *ngIf="_empresa != 1"> {{ item.usua_nome_lenovo }} </ion-col>
 						<ion-col col-2 *ngIf="_empresa != 1"> {{ item.audit_2 }} </ion-col>
 
