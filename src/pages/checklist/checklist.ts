@@ -23,6 +23,14 @@ export class ChecklistPage {
 	_empresa:string = sessionStorage.getItem('usem_empr_id');
 	_concluirAuditoria:boolean = false;
 
+	//Será necessário somente quando lenovo for finalizar a auditoria
+	_judgement = {
+		audi_judgement_justification: '',
+		audi_comments: '',
+		audi_id: 0,
+		empresa: ''
+	}
+
 	constructor(public navCtrl: NavController,
 				public navParams: NavParams,
 				private auditProcessProvider: AuditProcessProvider,
@@ -64,7 +72,12 @@ export class ChecklistPage {
 
 		loader.present();
 
-		this.auditProvider.concluirAuditoria(this.audi_id, this._empresa)
+		this._judgement.audi_id = this.audi_id;
+		this._judgement.empresa = this._empresa;
+		console.log(this._judgement);
+
+
+		this.auditProvider.concluirAuditoria(this._judgement)
 		.subscribe(
 			data=>{
 			},
