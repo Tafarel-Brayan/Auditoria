@@ -32,3 +32,11 @@
 .border-top-secondary{ border-top: 3px solid #2357A5; }
 .border-top-warning{ border-top: 3px solid #E8A40C; }
 .border-top-danger{ border-top: 3px solid #FF0000; }
+
+.background-gradient-warning{
+    background-image: linear-gradient(to right top, #e8a40c, #e09f1e, #d79a28, #cf9631, #c69138);
+}
+
+.background-gradient-warning ion-card-header{
+    color: #FFF;
+}

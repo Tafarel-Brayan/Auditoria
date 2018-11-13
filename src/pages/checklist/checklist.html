@@ -1,25 +1,26 @@
-<!--
-    Generated template for the ChecklistPage page.
-    
-    See http://ionicframework.com/docs/components/#navigation for more info on
-    Ionic pages and navigation.
--->
 <ion-header>
-    
     <ion-navbar>
         <ion-title>Processos Cheklist</ion-title>
     </ion-navbar>
-    
 </ion-header>
 
 
 <ion-content>
     
 	<ion-list>
+        <ion-item-divider color="lightGrey">
+            <strong>Legenda: </strong>
+            <ion-badge item-end color="primary"> <small>Qtd. de itens conforme</small></ion-badge>
+            <ion-badge item-end color="dark"><small>Qtd. de itens não conforme</small></ion-badge>
+        </ion-item-divider>
+
         <ion-item *ngFor="let processo of processos" (click)="irParaItens(processo.aupr_id)">
             {{ processo.aupr_proc_name }}
-            <ion-badge item-end color="secondary" *ngIf="_empresa == 1">{{ processo.auditados_digiboard }}/{{processo.ausc_score_digiboard}}</ion-badge>
-            <ion-badge item-end color="danger"    *ngIf="_empresa != 1">{{ processo.auditados_lenovo }}/{{processo.ausc_score_digiboard}}</ion-badge>
+            <ion-badge item-end color="primary" *ngIf="_empresa == 1"> {{ processo.aprovados_digiboard }}</ion-badge>
+            <ion-badge item-end color="dark"    *ngIf="_empresa == 1"> {{processo.reprovados_digiboard}} </ion-badge>
+
+            <ion-badge item-end color="primary" *ngIf="_empresa != 1"> {{ processo.aprovados_lenovo }}</ion-badge>
+            <ion-badge item-end color="dark"    *ngIf="_empresa != 1"> {{processo.reprovados_lenovo}} </ion-badge>
         </ion-item>
     </ion-list>
     

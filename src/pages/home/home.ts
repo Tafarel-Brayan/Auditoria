@@ -20,26 +20,44 @@ export class HomePage {
 		public vwAuditProvider:VwListAuditRespStatusProvider
 		) {
 			
-		}
-		
-		auditar(audi_id){
-			this.navCtrl.push(AuditoriaPage, {audi_id:audi_id});
-		}
-
-		ionViewDidLoad(){
-
-			this.vwAuditProvider.findAll()
-			.subscribe(
-				data => this.dataHome = data
-			)
-
-		}
-		
-		ionViewCanEnter(){
-			if(this.authProvider.isLogged() === null ){
-				this.navCtrl.setRoot(LoginPage);
-			}
-		}
-		
 	}
+	
+	auditar(audi_id){
+
+		let index = this.dataHome.map( e=> e.audi_id).indexOf(audi_id);
+		console.log(this.dataHome[index].usua_nome_len);
+		let usuaLen = this.dataHome[index].usua_nome_len;
+		console.log(usuaLen);
+		
+		// if(this._empresa != '1' && (this.dataHome[index].usua_nome_len == null || this.dataHome[index].usua_nome_len == '')){
+		// 	console.log("EBA!");
+		// }else{
+		// 	console.log("Ahhhh =(");
+		// }
+
+		this.navCtrl.push(
+			AuditoriaPage,
+			{
+				audi_id:audi_id,
+				usua_nome_len: usuaLen
+			}
+		);
+	}
+
+	ionViewDidLoad(){
+
+		this.vwAuditProvider.findAll()
+		.subscribe(
+			data => this.dataHome = data
+		)
+
+	}
+	
+	ionViewCanEnter(){
+		if(this.authProvider.isLogged() === null ){
+			this.navCtrl.setRoot(LoginPage);
+		}
+	}
+		
+}
 	

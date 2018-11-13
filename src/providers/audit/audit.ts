@@ -14,6 +14,11 @@ export class AuditProvider {
         return this.http.post(`${Utils.WERBSERVICE}/api/audit`, form);
     }
 
+    associarUserLenovo(audi_id, usua_id){
+        return this.http.put(`${Utils.WERBSERVICE}/audit/associarUserLenovo/id/${audi_id}`, { usua_id:usua_id });
+        // return this.http.put(`${Utils.WERBSERVICE}/auditscore/update/id/${id}`, form);
+    }
+
     concluirAuditoria(judgement){
 
         return this.http.post(

@@ -19,29 +19,29 @@
 			<ion-grid *ngIf="dataHome">
 
 				<ion-row>
-					<ion-col col-2 ><strong>Id</strong></ion-col>
-
-					<ion-col col-8 *ngIf="_empresa == 1"  ><strong>Auditor Digiboard</strong></ion-col>
-					<ion-col col-8 *ngIf="_empresa != 1"><strong>Auditor Lenovo</strong></ion-col>
-
-					<ion-col col-2><strong>Status</strong></ion-col>
+					<ion-col col-2><small><strong>Id</strong></small></ion-col>
+					<ion-col col-7 *ngIf="_empresa == 1"  ><small><strong>Auditor Digiboard</strong></small></ion-col>
+					<ion-col col-7 *ngIf="_empresa != 1"><small><strong>Auditor Lenovo</strong></small></ion-col>
+					<ion-col col-3 text-center ><small><strong>Status</strong></small></ion-col>
 				</ion-row>
 
 				<div *ngFor="let item of dataHome">
-
-					<ion-row (click)="auditar( item.audi_id )" *ngIf="(_empresa == 1 && item.audi_status_digiboard == null ) || (_empresa !=1 && item.audi_status_digiboard != null)">
+					<ion-row (click)="auditar( item.audi_id )" *ngIf="(_empresa == 1 && item.audi_status_digiboard != 'S' ) || ( (_empresa !=1 && item.audi_status_lenovo != 'S') && (item.audi_status_digiboard == 'S') )">
 
 						<ion-col col-2 >{{ item.audi_id }}</ion-col>
-						<ion-col col-8 *ngIf="_empresa == 1"> {{ item.usua_nome_dgb }} </ion-col>
-						<ion-col col-2 *ngIf="_empresa == 1"> {{ item.audit_1 }}% </ion-col>
-						<ion-col col-8 *ngIf="_empresa != 1"> {{ item.usua_nome_lenovo }} </ion-col>
-						<ion-col col-2 *ngIf="_empresa != 1"> {{ item.audit_2 }}% </ion-col>
+
+						<ion-col col-7 				*ngIf="_empresa == 1"> {{ item.usua_nome_dgb }} </ion-col>
+						<ion-col col-3 text-center  *ngIf="_empresa == 1"> {{ item.audit_1 }}% </ion-col>
+
+						<ion-col col-7 				*ngIf="_empresa != 1"> {{ item.usua_nome_len }} </ion-col>
+						<ion-col col-3 text-center 	*ngIf="_empresa != 1"> {{ item.audit_2 }}% </ion-col>
 
 					</ion-row>
 
 				</div>
 
 			</ion-grid>
+
 		</ion-card-content>
 		
 	</ion-card>

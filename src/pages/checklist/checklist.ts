@@ -74,8 +74,6 @@ export class ChecklistPage {
 
 		this._judgement.audi_id = this.audi_id;
 		this._judgement.empresa = this._empresa;
-		console.log(this._judgement);
-
 
 		this.auditProvider.concluirAuditoria(this._judgement)
 		.subscribe(

@@ -18,7 +18,12 @@ export class AuditProcessProvider {
     .map( ( res:Response ) => res.json() );
   }
 
-  getSummary(audi_id, empresa):Observable<SummaryInterface[]>{
+  getSummaryTable1(audi_id, empresa):Observable<any[]>{
+    return this.http.get(`${Utils.WERBSERVICE}/auditprocess/SummaryTb1/audi_id/${audi_id}/empresa/${empresa}`)
+    .map( (res:Response) => res.json() );
+  }
+
+  getSummaryTable2(audi_id, empresa):Observable<SummaryInterface[]>{
     return this.http.get(`${Utils.WERBSERVICE}/auditprocess/summary/audi_id/${audi_id}/empresa/${empresa}`)
     .map( (res:Response) => res.json() );
   }

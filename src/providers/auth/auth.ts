@@ -22,7 +22,15 @@ export class AuthProvider {
 	}
 	
 	logout(){
-		sessionStorage.removeItem('usua_id')
+
+		sessionStorage.removeItem('usem_empr_id');
+		sessionStorage.removeItem('usem_empr_nome');
+		sessionStorage.removeItem('usua_cpf');
+		sessionStorage.removeItem('usua_login');
+		sessionStorage.removeItem('usua_login');
+		sessionStorage.removeItem('usua_nome');
+		sessionStorage.removeItem('usua_id');
+
 	}
 	
 }

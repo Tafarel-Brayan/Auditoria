@@ -28,21 +28,19 @@ export class MyApp {
                 public splashScreen: SplashScreen,
                 public authProvider: AuthProvider,
                 private loginService: LoginService ) {
-        
+            
         this.initializeApp();
         
         this.nomeUser = sessionStorage.getItem('usua_nome') !== null ? sessionStorage.getItem('usua_nome') : this.nomeUser
         this.nomeEmpresa = sessionStorage.getItem('usem_empr_nome') !== null ? sessionStorage.getItem('usem_empr_nome') : this.nomeEmpresa
-       
-
+        
+        
         // used for an example of ngFor and navigation
         this.pages = [
             { title: 'Início', component: HomePage, icon: 'home' },
             { title: 'Cadastrar', component: AuditoriaFormPage, icon: 'md-add-circle' },
         ];
-        
-        
-        
+
     }
     
     initializeApp() {
@@ -56,23 +54,42 @@ export class MyApp {
             this.headerColor.tint("#16A086");
 
         });
-        this.loginService.notifier.subscribe( 
+
+        this.loginService.notifier.subscribe(
+
             retorno => {
+
                 this.nomeUser = retorno.name;
                 this.nomeEmpresa = retorno.empresa
+
+                if(retorno.usem_empr_id == '1'){
+
+                    this.pages = [
+                        { title: 'Início', component: HomePage, icon: 'home' },
+                        { title: 'Cadastrar', component: AuditoriaFormPage, icon: 'md-add-circle' },
+                    ];
+
+                }else{
+
+                    this.pages = [
+                        { title: 'Início', component: HomePage, icon: 'home' },
+                        // { title: 'Cadastrar', component: AuditoriaFormPage, icon: 'md-add-circle' },
+                    ];
+
+                }
+
             }
-            )
-        }
-        
-        openPage(page) {
-            // Reset the content nav to have just this page
-            // we wouldn't want the back button to show in this scenario
-            this.nav.setRoot(page.component);
-        }
-        
-        logout(){
-            this.authProvider.logout();
-            this.nav.setRoot(LoginPage);
-        }
+        )
     }
-        
+
+    openPage(page) {
+        // Reset the content nav to have just this page
+        // we wouldn't want the back button to show in this scenario
+        this.nav.setRoot(page.component);
+    }
+    
+    logout(){
+        this.nav.setRoot(LoginPage);
+        this.authProvider.logout();
+    }
+}

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SummaryInterface } from './summary-interface';
 import { AuditScoreProvider } from './../../providers/audit-score/audit-score';
 import { AuditProcessProvider } from './../../providers/audit-process/audit-process';
+import { AuditProvider } from '../../providers/audit/audit';
 
 import { Chart } from 'chart.js';
 
@@ -14,8 +15,11 @@ import { Chart } from 'chart.js';
 export class SummaryPage {
 
     _audi_id:number;
+    _usua_len: boolean;
     _empresa:string = sessionStorage.getItem('usem_empr_id');
+    _usua_id:string = sessionStorage.getItem('usua_id');
     _summary: SummaryInterface[];
+    _summaryTb1 : any[];
     _resultScore:string;
 
 
@@ -25,20 +29,44 @@ export class SummaryPage {
     
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
+                private audit: AuditProvider,
                 private auditProcessProvider: AuditProcessProvider,
                 private auditScoreProvider: AuditScoreProvider) {
     }
 
     ionViewDidEnter() {
-        
+
+        //this._usua_len = (this.navParams.get('usua_nome_len') != null || this.navParams.get('usua_nome_len') != "") ? true: false;
         this._audi_id = this.navParams.get('audi_id');
 
-        this.auditProcessProvider.getSummary(this._audi_id, this._empresa)
+        if(this._empresa != '1'){
+            
+            console.log('audi_id:', this.navParams.get('audi_id'));
+            console.log('userLen:', this.navParams.get('usua_nome_len'));
+
+			this._usua_len = (this.navParams.get('usua_nome_len') == null || this.navParams.get('usua_nome_len') == "") ? false: true;
+		}else{
+            console.log("OIOI")
+			this._usua_len = false;
+		}
+
+        this.auditProcessProvider.getSummaryTable1(this._audi_id, this._empresa)
+            .subscribe( 
+                data => { 
+                    this._summaryTb1 = data;
+                },
+                err => '',
+                () => {
+                    this.showRadarChart();
+                }
+            );
+
+        this.auditProcessProvider.getSummaryTable2(this._audi_id, this._empresa)
             .subscribe( 
                 data => { this._summary = data },
                 err => '',
                 () => {
-                    this.showRadarChart();
+                    //this.showRadarChart();
                 }
             );
         
@@ -49,14 +77,25 @@ export class SummaryPage {
 
     }
 
+    associarUserLenovo(){
+        this.audit.associarUserLenovo(this._audi_id, this._usua_id)
+        .subscribe(
+            (data) => {
+                this._usua_len = true;
+            }
+        )
+    }
+
     showRadarChart(){
 
         let labels = [];
         let values = [];
+
         let i:number = 0;
-        for(let obj of this._summary){
+
+        for(let obj of this._summaryTb1){
             labels[i] = obj.aupr_proc_name;
-            values[i] = obj.close;
+            values[i] = obj.percent_aprovados;
             i++;
         }
 
@@ -78,7 +117,7 @@ export class SummaryPage {
             options:{
                 legend:{
                     display: false
-                },
+                }
             }
 
         });
