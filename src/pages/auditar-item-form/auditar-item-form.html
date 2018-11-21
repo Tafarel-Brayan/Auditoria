@@ -30,10 +30,23 @@
                 </ion-item>
                 
                 <ion-item>
-                    <ion-label floating *ngIf="_setores"  >Department</ion-label>
-                    <ion-select formControlName="ausc_department" [selectOptions]="{title: 'Setores', subTitle: 'Selecione um'}" cancelText="Cancelar" okText="Ok" >
+                    
+                    <ion-label floating>Department</ion-label>
+                    
+                    <!-- <ion-select formControlName="ausc_department" [selectOptions]="{title: 'Setores', subTitle: 'Selecione um'}" cancelText="Cancelar" okText="Ok" interface="alert">
                         <ion-option *ngFor="let setor of _setores" [value]="setor.codigo">{{ setor.setor }}</ion-option>
-                    </ion-select>
+                    </ion-select> -->
+
+                    <select-searchable  formControlName="ausc_department" *ngIf="_setores" 
+                        item-content
+                        [(ngModel)]="_setor"
+                        [items]="_setores"
+                        itemValueField="codigo"
+                        itemTextField="setor"
+                        [canSearch]="true"
+                        (onChange)="ownerChanged($event)">
+                    </select-searchable>
+
                 </ion-item>
                 
                 <ion-item>

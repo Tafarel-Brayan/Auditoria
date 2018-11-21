@@ -7,7 +7,7 @@
 <ion-content>
 	<ion-item-group *ngFor="let category of categoryCriterias" >
 		<ion-item-divider color="lightGrey">{{category.auca_cate_name}}</ion-item-divider>
-		<ion-item *ngFor="let item of category.customer_criterion" text-wrap (click)="auditar(item.aucc_id)"  >
+		<ion-item *ngFor="let item of category.customer_criterion" text-wrap (click)="auditar(item.aucc_id)" color="{{item.color}}" >
 			{{ item.aucc_cucr_custumer_criteria }}
 
 			<ion-badge *ngIf="_empresa  == 1 && item.ausc_score_digiboard == 1" color="primary" item-end><ion-icon name="thumbs-up"></ion-icon></ion-badge>

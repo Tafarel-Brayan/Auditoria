@@ -41,6 +41,7 @@ export class ChecklistPage {
 	}
 	
 	ionViewDidEnter() {
+
 		this.audi_id = this.navParams.get('audi_id');
 
 		this.auditScoreProvider.getTotal(this.audi_id, this._empresa)
@@ -56,6 +57,16 @@ export class ChecklistPage {
 
 		this.auditProcessProvider.getProcess(this.audi_id)
 			.subscribe(data => this.processos = data);
+
+		this.auditProvider.getJudgement(this.audi_id, this._empresa)
+				.subscribe(
+					data => {
+						this._judgement.audi_id = this.audi_id;
+						this._judgement.audi_comments = data.audi_comments;
+						this._judgement.audi_judgement_justification = data.audi_judgement_justification;
+						this._judgement.empresa = this._empresa;
+					}
+				)
 	}
 
 	irParaItens(proc_id){

@@ -36,17 +36,11 @@ export class SummaryPage {
 
     ionViewDidEnter() {
 
-        //this._usua_len = (this.navParams.get('usua_nome_len') != null || this.navParams.get('usua_nome_len') != "") ? true: false;
         this._audi_id = this.navParams.get('audi_id');
 
         if(this._empresa != '1'){
-            
-            console.log('audi_id:', this.navParams.get('audi_id'));
-            console.log('userLen:', this.navParams.get('usua_nome_len'));
-
-			this._usua_len = (this.navParams.get('usua_nome_len') == null || this.navParams.get('usua_nome_len') == "") ? false: true;
+			this._usua_len = (this.navParams.get('usua_nome_len') == null || this.navParams.get('usua_nome_len') == "") ? true: false;
 		}else{
-            console.log("OIOI")
 			this._usua_len = false;
 		}
 
@@ -81,7 +75,8 @@ export class SummaryPage {
         this.audit.associarUserLenovo(this._audi_id, this._usua_id)
         .subscribe(
             (data) => {
-                this._usua_len = true;
+                this._usua_len = false;
+                this.navParams.data.permissao = true;
             }
         )
     }

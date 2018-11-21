@@ -5,5 +5,6 @@ export interface AuditCustomerCriteriaInterface{
     aucc_cucr_crit_id: number,
     aucc_cucr_custumer_criteria: string,
     ausc_score_digiboard: number,
-    ausc_score_lenovo: number
+    ausc_score_lenovo: number,
+    color: string
 }

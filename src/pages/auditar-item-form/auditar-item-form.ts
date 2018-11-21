@@ -22,6 +22,7 @@ export class AuditarItemFormPage {
 
     @ViewChild('myselect') selectComponent:SelectSearchableComponent;
 
+    _setor: SetorInterface;
     _setores: SetorInterface[];
     _auditScoreInterface:AuditScoreInterface;
     _owner: VwOwnerInterface;
@@ -94,7 +95,10 @@ export class AuditarItemFormPage {
                             
                             if(this._auditScoreInterface.department_name_digiboard != null && this._auditScoreInterface.department_name_digiboard != ''){
                                 let z = this._setores.map(e => e.setor).indexOf(this._auditScoreInterface.department_name_digiboard);
-                                this._formGroup.controls['ausc_department'].setValue(this._setores[z].codigo);
+                                
+                                this._setor = this._setores[z];
+                                //this._formGroup.controls['ausc_department'].setValue(this._setores[z].codigo);
+
                             }
         
                             for(let key in this._owners){
@@ -122,7 +126,8 @@ export class AuditarItemFormPage {
 
                             if(this._auditScoreInterface.department_name_lenovo != null && this._auditScoreInterface.department_name_lenovo != ''){
                                 let z = this._setores.map(e => e.setor).indexOf(this._auditScoreInterface.department_name_lenovo);
-                                this._formGroup.controls['ausc_department'].setValue(this._setores[z].codigo);
+                                //this._formGroup.controls['ausc_department'].setValue(this._setores[z].codigo);
+                                this._setor = this._setores[z];
                             }
 
                             for(let key in this._owners){
@@ -134,6 +139,12 @@ export class AuditarItemFormPage {
                             this._owner = this._owners[keyOwner];
                             this._formGroup.controls['ausc_action'].setValue(this._auditScoreInterface.ausc_action_lenovo);
                             this._formGroup.controls['ausc_score'].setValue(this._auditScoreInterface.ausc_score_lenovo);
+
+                            if(this._auditScoreInterface.ausc_score_lenovo == 1){
+                                this._score = true;
+                            }else{
+                                this._score = false;
+                            }
         
                         }
                     }

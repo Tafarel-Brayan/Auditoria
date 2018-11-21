@@ -14,6 +14,8 @@ export class HomePage {
 	
 	dataHome: HomeInterface[];
 	_empresa:string = sessionStorage.getItem('usem_empr_id');
+	_AuditCompleted: HomeInterface[] = new Array();
+	_AuditNotCompleted: HomeInterface[] = new Array();
 
 	constructor(public navCtrl: NavController,
 		public authProvider: AuthProvider,
@@ -25,15 +27,7 @@ export class HomePage {
 	auditar(audi_id){
 
 		let index = this.dataHome.map( e=> e.audi_id).indexOf(audi_id);
-		console.log(this.dataHome[index].usua_nome_len);
 		let usuaLen = this.dataHome[index].usua_nome_len;
-		console.log(usuaLen);
-		
-		// if(this._empresa != '1' && (this.dataHome[index].usua_nome_len == null || this.dataHome[index].usua_nome_len == '')){
-		// 	console.log("EBA!");
-		// }else{
-		// 	console.log("Ahhhh =(");
-		// }
 
 		this.navCtrl.push(
 			AuditoriaPage,
@@ -42,13 +36,23 @@ export class HomePage {
 				usua_nome_len: usuaLen
 			}
 		);
+
 	}
 
 	ionViewDidLoad(){
 
 		this.vwAuditProvider.findAll()
 		.subscribe(
-			data => this.dataHome = data
+			(data) => {
+				this.dataHome = data;
+				data.forEach(obj => {
+					if(obj.audi_status_digiboard == "S" && obj.audi_status_lenovo == "S"){
+						this._AuditCompleted.push(obj);
+					}else{
+						this._AuditNotCompleted.push(obj);
+					}
+				});
+			}
 		)
 
 	}

@@ -2,7 +2,7 @@
 <!-- <ion-tabs selectedIndex="1" > -->
 
 <ion-tabs>
-    <ion-tab [root]="summaryRoot"        tabTitle="Summary"         tabIcon="analytics" [rootParams]="params"></ion-tab>
-    <ion-tab [root]="checklistRoot"   [enabled]="_usua_len"   tabTitle="Checklist"       tabIcon="paper" [rootParams]="params"></ion-tab>
+    <ion-tab [root]="summaryRoot"     tabTitle="Summary"   tabIcon="analytics" [rootParams]="params"></ion-tab>
+    <ion-tab [root]="checklistRoot"   tabTitle="Checklist" tabIcon="paper"     [rootParams]="params" [enabled]="params.permissao"></ion-tab>
     <!-- <ion-tab [root]="summaryAuditorRoot" tabTitle="Summary auditor" tabIcon="information-circle" [rootParams]="params"></ion-tab> -->
 </ion-tabs>

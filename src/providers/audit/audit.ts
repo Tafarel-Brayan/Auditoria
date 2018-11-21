@@ -28,4 +28,9 @@ export class AuditProvider {
        
     }
 
+    getJudgement(audi_id, empr_id){
+        return this.http.get(`${Utils.WERBSERVICE}/audit/getJudgement/audi_id/${audi_id}/empr_id/${empr_id}`)
+        .map( (res) => res.json() );
+    }
+
 }
