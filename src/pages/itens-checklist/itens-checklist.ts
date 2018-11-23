@@ -16,11 +16,13 @@ export class ItensChecklistPage {
 	categoryCriterias: CategoryCriteriaInterface[];
     _empresa:string = sessionStorage.getItem('usem_empr_id');
     _iconDigiboard:string;
-    _iconLenovo:string;
+	_iconLenovo:string;
+	_judgement:boolean;
 
 	constructor(public navCtrl: NavController,
 				public navParams: NavParams,
 				private accbProvider: AuditCustomerCriteriaBondProvider) {
+		this._judgement = this.navParams.get('judgement');
 	}
 
     ionViewDidEnter() {
@@ -44,7 +46,8 @@ export class ItensChecklistPage {
 		this.navCtrl.push(AuditarItemFormPage,{
 			audi_id:this.audi_id,
 			proc_id:this.proc_id,
-			aucc_id:aucc_id
+			aucc_id:aucc_id,
+			judgement: this._judgement
 		})
     }
 

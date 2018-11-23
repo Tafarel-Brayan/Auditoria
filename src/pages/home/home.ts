@@ -28,12 +28,16 @@ export class HomePage {
 
 		let index = this.dataHome.map( e=> e.audi_id).indexOf(audi_id);
 		let usuaLen = this.dataHome[index].usua_nome_len;
+		let judgment = (this.dataHome[index].audi_status_digiboard == "S" && this.dataHome[index].audi_status_lenovo == "S") ? true : false;
+
+
 
 		this.navCtrl.push(
 			AuditoriaPage,
 			{
-				audi_id:audi_id,
-				usua_nome_len: usuaLen
+				audi_id:		audi_id,
+				usua_nome_len: 	usuaLen,
+				judgment:		judgment
 			}
 		);
 
@@ -46,11 +50,13 @@ export class HomePage {
 			(data) => {
 				this.dataHome = data;
 				data.forEach(obj => {
+
 					if(obj.audi_status_digiboard == "S" && obj.audi_status_lenovo == "S"){
 						this._AuditCompleted.push(obj);
 					}else{
 						this._AuditNotCompleted.push(obj);
 					}
+
 				});
 			}
 		)

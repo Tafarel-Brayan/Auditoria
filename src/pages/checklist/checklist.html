@@ -4,7 +4,6 @@
     </ion-navbar>
 </ion-header>
 
-
 <ion-content>
     
 	<ion-list>
@@ -12,15 +11,18 @@
             <strong>Legenda: </strong>
             <ion-badge item-end color="primary"> <small>Qtd. de itens conforme</small></ion-badge>
             <ion-badge item-end color="dark"><small>Qtd. de itens não conforme</small></ion-badge>
+            <ion-badge item-end color="danger"><small>Qtd. Total</small></ion-badge>
         </ion-item-divider>
 
         <ion-item *ngFor="let processo of processos" (click)="irParaItens(processo.aupr_id)">
             {{ processo.aupr_proc_name }}
             <ion-badge item-end color="primary" *ngIf="_empresa == 1"> {{ processo.aprovados_digiboard }}</ion-badge>
             <ion-badge item-end color="dark"    *ngIf="_empresa == 1"> {{processo.reprovados_digiboard}} </ion-badge>
+            <ion-badge item-end color="danger"    *ngIf="_empresa == 1"> {{processo.total_item}} </ion-badge>
 
             <ion-badge item-end color="primary" *ngIf="_empresa != 1"> {{ processo.aprovados_lenovo }}</ion-badge>
             <ion-badge item-end color="dark"    *ngIf="_empresa != 1"> {{processo.reprovados_lenovo}} </ion-badge>
+            <ion-badge item-end color="danger"    *ngIf="_empresa != 1"> {{processo.total_item}} </ion-badge>
         </ion-item>
     </ion-list>
     
@@ -28,19 +30,19 @@
 
         <ion-card-content>
 
-            <div *ngIf="_empresa != 1"  >
+            <div>
                 <ion-item>
                     <ion-label color="primary" stacked>Audit Judgement Comments</ion-label>
-                    <ion-input placeholder="Type here" [(ngModel)]="_judgement.audi_judgement_justification" ></ion-input>
+                    <ion-input placeholder="Type here" [(ngModel)]="_judgement.audi_judgement_justification" [readonly]="_judgement.disabled" ></ion-input>
                 </ion-item>
                 
                 <ion-item>
                     <ion-label color="primary" stacked>Comments</ion-label>
-                    <ion-textarea placeholder="Enter a comments" [(ngModel)]="_judgement.audi_comments" ></ion-textarea>
+                    <ion-textarea placeholder="Enter a comments" [(ngModel)]="_judgement.audi_comments" [readonly]="_judgement.disabled"></ion-textarea>
                 </ion-item>
             </div>
 
-            <button ion-button full Large color="primary" (click)="concluirAuditoria()">Concluir Auditoria</button>
+            <button ion-button full Large color="primary" (click)="concluirAuditoria()" *ngIf="!_judgement.disabled">Concluir Auditoria</button>
             
         </ion-card-content>
 

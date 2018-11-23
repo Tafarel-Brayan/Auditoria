@@ -73,7 +73,7 @@
                     <ion-toggle formControlName="ausc_score" color="primary" checked="{{ _score }}"></ion-toggle>
                 </ion-item>
                 
-                <ion-item>
+                <ion-item *ngIf="!_judgement" >
                     <button type="submit" color="primary" ion-button full [disabled]="!_formGroup.valid">Cadastrar</button>
                 </ion-item>
                 

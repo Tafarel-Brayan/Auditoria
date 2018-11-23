@@ -32,6 +32,7 @@ export class AuditarItemFormPage {
     _aucc_id:number;
     _formGroup: FormGroup;
     _score:boolean = false;
+    _judgement: boolean = false;
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
@@ -42,15 +43,17 @@ export class AuditarItemFormPage {
                 private toastCtrl: ToastController,
                 private loadingCtrl: LoadingController) {
 
-            this._formGroup = this.formBuilder.group({
-                ausc_reference_document:['', Validators.required],
-                ausc_remark:['', Validators.required],
-                ausc_department:['', Validators.required],
-                ausc_owner:['', Validators.required],
-                ausc_action:['', Validators.required],
-                ausc_score:[''],
-                empresa:[sessionStorage.getItem('usem_empr_id')]
-            });
+        this._judgement = this.navParams.get('judgement');
+
+        this._formGroup = this.formBuilder.group({
+            ausc_reference_document:[{value: '', disabled: this._judgement}, Validators.required],
+            ausc_remark:[{value: '', disabled: this._judgement}, Validators.required],
+            ausc_department:[{value: '', disabled: this._judgement}, Validators.required],
+            ausc_owner:[{value: '', disabled: this._judgement}, Validators.required],
+            ausc_action:[{value: '', disabled: this._judgement}, Validators.required],
+            ausc_score:[{value: '', disabled: this._judgement}],
+            empresa:[sessionStorage.getItem('usem_empr_id')]
+        });
 
     }
     
@@ -67,7 +70,6 @@ export class AuditarItemFormPage {
         this._audi_id = this.navParams.get('audi_id');
         this._aucc_id = this.navParams.get('aucc_id');
         this._proc_id = this.navParams.get('proc_id');
-
 
         this.vwOwnerProvider.findAll().subscribe(
             data => this._owners = data
@@ -95,10 +97,8 @@ export class AuditarItemFormPage {
                             
                             if(this._auditScoreInterface.department_name_digiboard != null && this._auditScoreInterface.department_name_digiboard != ''){
                                 let z = this._setores.map(e => e.setor).indexOf(this._auditScoreInterface.department_name_digiboard);
-                                
                                 this._setor = this._setores[z];
                                 //this._formGroup.controls['ausc_department'].setValue(this._setores[z].codigo);
-
                             }
         
                             for(let key in this._owners){
@@ -126,8 +126,9 @@ export class AuditarItemFormPage {
 
                             if(this._auditScoreInterface.department_name_lenovo != null && this._auditScoreInterface.department_name_lenovo != ''){
                                 let z = this._setores.map(e => e.setor).indexOf(this._auditScoreInterface.department_name_lenovo);
-                                //this._formGroup.controls['ausc_department'].setValue(this._setores[z].codigo);
                                 this._setor = this._setores[z];
+                                console.log(this._setor);
+                                //this._formGroup.controls['ausc_department'].setValue(this._setores[z].codigo);
                             }
 
                             for(let key in this._owners){

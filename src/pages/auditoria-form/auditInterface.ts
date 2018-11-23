@@ -73,5 +73,8 @@ export interface AuditInterface{
     audi_user_id_authorizedby:String,
     audi_remark:String,
     audi_status_lenovo:String,
-    audi_status_digiboard: String
+    audi_status_digiboard: String,
+    audi_judgement_justification_digiboard: String,
+    audi_comments_digiboard: String,
+    audi_report_date_digiboard: String
 }

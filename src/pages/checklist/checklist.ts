@@ -28,7 +28,8 @@ export class ChecklistPage {
 		audi_judgement_justification: '',
 		audi_comments: '',
 		audi_id: 0,
-		empresa: ''
+		empresa: '',
+		disabled: false
 	}
 
 	constructor(public navCtrl: NavController,
@@ -43,6 +44,7 @@ export class ChecklistPage {
 	ionViewDidEnter() {
 
 		this.audi_id = this.navParams.get('audi_id');
+		this._judgement.disabled = this.navParams.get('judgment');
 
 		this.auditScoreProvider.getTotal(this.audi_id, this._empresa)
 			.subscribe(
@@ -72,7 +74,8 @@ export class ChecklistPage {
 	irParaItens(proc_id){
 		this.navCtrl.push(ItensChecklistPage, {
 			audi_id: this.audi_id,
-			proc_id: proc_id
+			proc_id: proc_id,
+			judgement: this._judgement.disabled
 		});
 	}
 
