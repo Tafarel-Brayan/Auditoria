@@ -22,18 +22,19 @@ export class LoginPage {
 				 public loginService: LoginService ) {
 
 		this.credentialsForm = this.formBuilder.group({
+
 			usuario:['', Validators.required],
 			senha:['', Validators.required],
-			
+
 		})
 	}
-		
+
 	logar(){
 		
 		this.auth.login(this.credentialsForm.controls.usuario.value, this.credentialsForm.controls.senha.value)
 		.subscribe(
 			(data) =>  {
-			
+
 				if(data){
 
 					this.loginService.notify(
