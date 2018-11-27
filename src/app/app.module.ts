@@ -8,6 +8,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HeaderColor } from '@ionic-native/header-color';
 
+import { Network } from '@ionic-native/network';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
@@ -61,6 +63,7 @@ import { SetorProvider } from '../providers/setor/setor';
     StatusBar,
     SplashScreen,
     HeaderColor,
+    Network,
     AuthProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     VwListAuditRespStatusProvider,

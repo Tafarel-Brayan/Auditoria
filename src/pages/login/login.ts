@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
+
 import { AuthProvider } from '../../providers/auth/auth';
 import { HomePage } from '../home/home';
 import { LoginService } from './login.service';
@@ -19,14 +20,16 @@ export class LoginPage {
 				 private formBuilder: FormBuilder,
 				 public auth: AuthProvider,
 				 public toastCtrl: ToastController,
-				 public loginService: LoginService ) {
+				 public loginService: LoginService,
+				 ) {
 
 		this.credentialsForm = this.formBuilder.group({
-
 			usuario:['', Validators.required],
 			senha:['', Validators.required],
+		});
 
-		})
+		
+
 	}
 
 	logar(){
@@ -54,11 +57,11 @@ export class LoginPage {
 					this.navCtrl.setRoot(HomePage);
 
 				}else{
-					this.showToast("Usuário ou senha inválido!", 3000, "bottom");
+					this.showToast("Invalid User or Password", 3000, "bottom");
 				}
 
 			},
-			err => { this.showToast("Houve um erro inesperado!", 3000, "bottom"); }
+			err => { this.showToast("You are not connected to a wifi network", 3000, "bottom"); }
 		);
 	}
 

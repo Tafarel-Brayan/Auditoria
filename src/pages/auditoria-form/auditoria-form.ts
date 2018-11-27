@@ -109,11 +109,11 @@ export class AuditoriaFormPage {
 		this.auditService.cadastrar(this.formGroup.value)
 		.subscribe(
 			(data) => {
-				this.showToast('Cadastrado Com Sucesso', 'bottom', 3000);
+				this.showToast('Registered successfully', 'bottom', 3000);
 				this.navCtrl.push(HomePage);
 			},
 			(err) => {
-				this.showToast('Houve um erro insesperado', 'bottom', 3000);
+				this.showToast('Failed, try again', 'bottom', 3000);
 			}
 		);
 		

@@ -158,7 +158,7 @@ export class AuditarItemFormPage {
     auditar(){
 
         const load = this.loadingCtrl.create({
-            content: "Auditando..."
+            content: "Auditing..."
         })
         load.present();
 
@@ -167,14 +167,14 @@ export class AuditarItemFormPage {
 
             data => '',
             err => {
-                this.showToast("Algo deu errado, tente novamente!", 5000, "bottom");
+                this.showToast("Failed, try again!", 5000, "bottom");
                 console.log(err);
             },
             () => {
                 
                 setTimeout(()=>{
                     load.dismiss();
-                    this.showToast("Item auditado com sucesso", 3000, "bottom");
+                    this.showToast("Item audited successfully", 3000, "bottom");
                     this.navCtrl.pop();
                 }, 1500);
 
@@ -185,7 +185,7 @@ export class AuditarItemFormPage {
 
     showLoader(){
         const loader = this.loadingCtrl.create({
-            content: "Auditando.."
+            content: "Auditing..."
         })
 
         loader.present();

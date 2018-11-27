@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, ToastController, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HeaderColor } from '@ionic-native/header-color';
-
+import { Network } from '@ionic-native/network';
 
 import { HomePage } from '../pages/home/home';
 import { AuthProvider } from '../providers/auth/auth';
@@ -22,18 +22,53 @@ export class MyApp {
     
     nomeUser: string;
     nomeEmpresa: string;
+    loaderWifi = this.loadingCtrl.create({
+        content: "Connect to wifi network..."
+    });
+
     constructor(private headerColor:HeaderColor,
                 public platform: Platform, 
                 public statusBar: StatusBar,
                 public splashScreen: SplashScreen,
                 public authProvider: AuthProvider,
-                private loginService: LoginService ) {
+                private loginService: LoginService,
+                private network:Network,
+                public toastCtrl: ToastController,
+                public loadingCtrl: LoadingController ) {
             
         this.initializeApp();
         
         this.nomeUser = sessionStorage.getItem('usua_nome') !== null ? sessionStorage.getItem('usua_nome') : this.nomeUser
         this.nomeEmpresa = sessionStorage.getItem('usem_empr_nome') !== null ? sessionStorage.getItem('usem_empr_nome') : this.nomeEmpresa
         
+        console.log(this.network.type);
+
+        this.network.onConnect()
+			.subscribe(
+				() => {
+                    setTimeout(() => {
+                        if (this.network.type === 'wifi') {
+                            //console.log('we got a wifi connection, woohoo!');
+                            this.toastCtrl.create({
+                                message: 'Network Wifi connected',
+                                duration: 3000
+                            }).present();
+                            this.loaderWifi.dismiss();
+                        }
+                    }, 1000);
+				}
+			);
+
+		this.network.onDisconnect()
+			.subscribe(
+				() => {
+                    if (this.network.type === this.network.Connection.CELL_4G || this.network.type === this.network.Connection.NONE) {
+                        setTimeout(() => {
+                            this.showLoaderWifi();
+                        }, 1000);
+                    }
+				}
+			);
         
         // used for an example of ngFor and navigation
         this.pages = [
@@ -44,7 +79,8 @@ export class MyApp {
     }
     
     initializeApp() {
-        
+
+
         this.platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
@@ -80,6 +116,14 @@ export class MyApp {
 
             }
         )
+
+    }
+
+    showLoaderWifi(){
+        this.loaderWifi = this.loadingCtrl.create({
+            content: "Connect to wifi network..."
+        });
+        this.loaderWifi.present();
     }
 
     openPage(page) {

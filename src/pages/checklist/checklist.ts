@@ -81,7 +81,7 @@ export class ChecklistPage {
 
 	concluirAuditoria(){
 		let loader = this.loadingCtrl.create({
-			content: 'Aguarde...'
+			content: 'Wait...'
 		});
 
 		loader.present();
@@ -99,7 +99,7 @@ export class ChecklistPage {
 			() => {
 				setTimeout(()=>{
 					loader.dismiss();
-					this.showToast('Auditoria Finalizada com Sucesso!', 3000, 'bottom');
+					this.showToast('Audit completed successfully', 3000, 'bottom');
 					this.navCtrl.setRoot(HomePage)
 				}, 1500);
 			}
