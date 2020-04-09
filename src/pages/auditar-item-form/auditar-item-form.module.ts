@@ -4,7 +4,7 @@ import { AuditarItemFormPage } from './auditar-item-form';
 
 @NgModule({
   declarations: [
-    AuditarItemFormPage,
+    //AuditarItemFormPage,
   ],
   imports: [
     IonicPageModule.forChild(AuditarItemFormPage),

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -21,6 +21,7 @@ import 'rxjs/add/operator/map';
 export class AuditarItemFormPage {
 
     @ViewChild('myselect') selectComponent:SelectSearchableComponent;
+    @ViewChild('myInput') myInput: ElementRef;
 
     _setor: SetorInterface;
     _setores: SetorInterface[];
@@ -127,7 +128,6 @@ export class AuditarItemFormPage {
                             if(this._auditScoreInterface.department_name_lenovo != null && this._auditScoreInterface.department_name_lenovo != ''){
                                 let z = this._setores.map(e => e.setor).indexOf(this._auditScoreInterface.department_name_lenovo);
                                 this._setor = this._setores[z];
-                                console.log(this._setor);
                                 //this._formGroup.controls['ausc_department'].setValue(this._setores[z].codigo);
                             }
 
@@ -155,6 +155,13 @@ export class AuditarItemFormPage {
 
     }
 
+    resize() {
+        var element = this.myInput['_elementRef'].nativeElement.getElementsByClassName("text-input")[0];
+        var scrollHeight = element.scrollHeight;
+        element.style.height = scrollHeight + 'px';
+        this.myInput['_elementRef'].nativeElement.style.height = (scrollHeight + 16) + 'px';
+    }
+
     auditar(){
 
         const load = this.loadingCtrl.create({
@@ -167,9 +174,9 @@ export class AuditarItemFormPage {
 
             data => '',
             err => {
+                load.dismiss();
                 this.showToast("Failed, try again!", 5000, "bottom");
-                console.log(err);
-            },
+                console.log(err.json());            },
             () => {
                 
                 setTimeout(()=>{
@@ -182,8 +189,14 @@ export class AuditarItemFormPage {
         )
     }
 
+    doRefresh(event) {
+		setTimeout(() => {
+			this.ionViewDidEnter();
+			event.complete();
+		}, 2000);
+	}
 
-    showLoader(){
+     showLoader(){
         const loader = this.loadingCtrl.create({
             content: "Auditing..."
         })

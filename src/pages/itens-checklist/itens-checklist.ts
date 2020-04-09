@@ -6,16 +6,16 @@ import { AuditarItemFormPage } from '../auditar-item-form/auditar-item-form';
 
 @IonicPage()
 @Component({
-  selector: 'page-itens-checklist',
-  templateUrl: 'itens-checklist.html',
+	selector: 'page-itens-checklist',
+	templateUrl: 'itens-checklist.html',
 })
 export class ItensChecklistPage {
 	
 	audi_id:number;
 	proc_id:number;
 	categoryCriterias: CategoryCriteriaInterface[];
-    _empresa:string = sessionStorage.getItem('usem_empr_id');
-    _iconDigiboard:string;
+	_empresa:string = sessionStorage.getItem('usem_empr_id');
+	_iconDigiboard:string;
 	_iconLenovo:string;
 	_judgement:boolean;
 
@@ -25,30 +25,41 @@ export class ItensChecklistPage {
 		this._judgement = this.navParams.get('judgement');
 	}
 
-    ionViewDidEnter() {
-	
+	ionViewDidEnter() {
+
 		this.audi_id = this.navParams.get('audi_id');
 		this.proc_id = this.navParams.get('proc_id');
 		this.accbProvider.getCategoryItemByAudit(this.audi_id, this.proc_id)
-			.subscribe(
-				(data) => {
-                    this.categoryCriterias = data;
-                    if(this._empresa == "1"){
-                        
-                    }else{
+		.subscribe(
+			(data) => {
+				
+				this.categoryCriterias = data;
+				
+				if(this._empresa == "1"){
+						
+				}else{
 
-                    }
 				}
-			);
-    }
+			}
+		);
+	}
 
-    auditar(aucc_id){
-		this.navCtrl.push(AuditarItemFormPage,{
-			audi_id:this.audi_id,
-			proc_id:this.proc_id,
-			aucc_id:aucc_id,
-			judgement: this._judgement
-		})
-    }
+	auditar(aucc_id){
+		this.navCtrl.push(AuditarItemFormPage,
+			{ 
+				audi_id:this.audi_id,
+				proc_id:this.proc_id,
+				aucc_id:aucc_id,
+				judgement: this._judgement
+			}
+		)
+	}
+
+	doRefresh(event) {
+		setTimeout(() => {
+			this.ionViewDidEnter();
+			event.complete();
+		}, 2000);
+	}
 
 }

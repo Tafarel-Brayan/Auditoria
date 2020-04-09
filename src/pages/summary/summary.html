@@ -6,6 +6,10 @@
 
 <ion-content class="card-background-page">
 
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
     <ion-card class="background-gradient-warning" *ngIf="_usua_len"  >
         <ion-card-header>
             Deseja se associar a esta auditoria?

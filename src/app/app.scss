@@ -28,6 +28,16 @@
     color: #FFF;
 }
 
+.div-version{
+    width: 100%;
+    text-align: right;
+    color: darkgrey;
+    padding: 10pt;
+    bottom: 0;
+    margin-bottom: 0;
+    position: fixed
+}
+
 .border-top-primary{ border-top: 3px solid #16A086; }
 .border-top-dark{ border-top: 3px solid #094035; }
 .border-top-secondary{ border-top: 3px solid #2357A5; }

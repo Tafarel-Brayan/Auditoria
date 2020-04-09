@@ -28,12 +28,13 @@ export class AuditoriaFormPage {
 				private authService: AuthProvider,
 				private empresaService: EmpresaProvider,
 				private auditService:AuditProvider) {
+
 		this.formGroup = this.formBuilder.group({
 			audi_id:[] ,
 			audi_comp_id:['', Validators.required],
 			audi_mfg_surveyed:[] ,
 			audi_mfg_address:[] ,
-			audi_mfg_phone:[] ,
+			audi_mfg_phone:['', [Validators.pattern('[0-9]+')]] ,
 			audi_mfg_fax:[] ,
 			audi_president_name:[] ,
 			audi_president_phone:[] ,

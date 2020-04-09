@@ -8,16 +8,16 @@
 		<form [formGroup]="credentialsForm" (ngSubmit)="logar()" >
 
 			<ion-item>
-				<ion-label color="light" floating >Usuário</ion-label>
+				<ion-label color="light" floating >User</ion-label>
 				<ion-input type="text" formControlName="usuario" ></ion-input>
 			</ion-item>
 			<ion-item>
-				<ion-label color="light" floating >Senha</ion-label>
+				<ion-label color="light" floating >Password</ion-label>
 				<ion-input type="password" formControlName="senha" ></ion-input>
 			</ion-item>
 			
 			<br><br>
-			<button color="secondary" ion-button full [disabled]="!credentialsForm.valid" >Entrar</button>
+			<button color="secondary" ion-button full [disabled]="!credentialsForm.valid" >Login</button>
 
 		</form>
 		

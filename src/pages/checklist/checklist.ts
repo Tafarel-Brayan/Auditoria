@@ -107,6 +107,14 @@ export class ChecklistPage {
 
 	}
 
+	doRefresh(event) {
+		
+		setTimeout(() => {
+			this.ionViewDidEnter();
+			event.complete();
+		}, 2000);
+	}
+
 	showToast(m, d, p){
 		
 		let toast = this.toastCtrl.create({

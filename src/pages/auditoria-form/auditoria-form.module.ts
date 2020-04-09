@@ -4,7 +4,7 @@ import { AuditoriaFormPage } from './auditoria-form';
 
 @NgModule({
   declarations: [
-    AuditoriaFormPage,
+    //AuditoriaFormPage,
   ],
   imports: [
     IonicPageModule.forChild(AuditoriaFormPage),

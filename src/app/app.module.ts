@@ -10,10 +10,10 @@ import { HeaderColor } from '@ionic-native/header-color';
 
 import { Network } from '@ionic-native/network';
 
+import { BrMaskerModule } from 'br-mask';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-
-
 import { LoginPage } from '../pages/login/login';
 import { AuditoriaPageModule } from '../pages/auditoria/auditoria.module';
 import { AuthProvider } from '../providers/auth/auth';
@@ -32,6 +32,7 @@ import { AuditarItemFormPage } from '../pages/auditar-item-form/auditar-item-for
 import { VwOwnerProvider } from '../providers/vw-owner/vw-owner';
 import { VwAuditScoreProvider } from '../providers/vw-audit-score/vw-audit-score';
 import { SetorProvider } from '../providers/setor/setor';
+import { ListPage } from '../pages/list/list';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { SetorProvider } from '../providers/setor/setor';
     LoginPage,
     AuditoriaFormPage,
     ItensChecklistPage,
-    AuditarItemFormPage
+    AuditarItemFormPage,
+    ListPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { SetorProvider } from '../providers/setor/setor';
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     AuditoriaPageModule,
-    SelectSearchableModule
+    SelectSearchableModule,
+    BrMaskerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

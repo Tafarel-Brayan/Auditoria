@@ -4,7 +4,7 @@ import { ItensChecklistPage } from './itens-checklist';
 
 @NgModule({
   declarations: [
-    ItensChecklistPage,
+    //ItensChecklistPage,
   ],
   imports: [
     IonicPageModule.forChild(ItensChecklistPage),

@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/Http';
 
 @NgModule({
   declarations: [
-    LoginPage,
+    //LoginPage,
   ],
   imports: [
     IonicPageModule.forChild(LoginPage),

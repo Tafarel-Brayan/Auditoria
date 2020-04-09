@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController, MenuController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
 
 import { AuthProvider } from '../../providers/auth/auth';
@@ -21,6 +21,8 @@ export class LoginPage {
 				 public auth: AuthProvider,
 				 public toastCtrl: ToastController,
 				 public loginService: LoginService,
+				 public loadingCtrl : LoadingController,
+				 public menu: MenuController
 				 ) {
 
 		this.credentialsForm = this.formBuilder.group({
@@ -28,11 +30,17 @@ export class LoginPage {
 			senha:['', Validators.required],
 		});
 
+		this.menu.enable(false);
 		
 
 	}
 
 	logar(){
+
+		const load = this.loadingCtrl.create({
+            content: "This process may take a few minutes!"
+        })
+        load.present();
 		
 		this.auth.login(this.credentialsForm.controls.usuario.value, this.credentialsForm.controls.senha.value)
 		.subscribe(
@@ -54,6 +62,7 @@ export class LoginPage {
 					sessionStorage.setItem("usua_cpf", data.usua_cpf);
 					sessionStorage.setItem("usem_empr_id", ""+data.usem_empr_id);
 					sessionStorage.setItem("usem_empr_nome", data.usem_empr_nome);
+					this.menu.enable(true);
 					this.navCtrl.setRoot(HomePage);
 
 				}else{
@@ -61,7 +70,18 @@ export class LoginPage {
 				}
 
 			},
-			err => { this.showToast("You are not connected to a wifi network", 3000, "bottom"); }
+			err => {
+				load.dismiss();
+				this.showToast("You are not connected to a wifi network", 3000, "bottom");
+			},
+			() => {
+                
+                setTimeout(()=>{
+                    load.dismiss();
+                    this.showToast("Welcome to system", 3000, "bottom");
+                }, 500);
+
+            }
 		);
 	}
 

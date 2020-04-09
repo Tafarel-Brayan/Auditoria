@@ -1,10 +1,15 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Auditar</ion-title>
+        <ion-title>Audit</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    
     <ion-card>
         
         <ion-item *ngIf="_auditScoreInterface" text-wrap color="lightGrey" >
@@ -64,12 +69,14 @@
                 
                 <ion-item>
                     <ion-label floating>Action</ion-label>
-                    <ion-input formControlName="ausc_action"  type="text"></ion-input>
+                    <!-- <ion-input formControlName="ausc_action"  type="text"></ion-input> -->
+                    <!-- <ion-textarea formControlName="ausc_action"></ion-textarea> -->
+                    <!-- <ion-textarea rows="4" formControlName="ausc_action"></ion-textarea> -->
+                    <ion-textarea #myInput id="myInput" rows="4" maxLength="500" (keyup)="resize()" formControlName="ausc_action"></ion-textarea>
                 </ion-item>
                 
                 <ion-item>
                     <ion-label>Score</ion-label>
-
                     <ion-toggle formControlName="ausc_score" color="primary" checked="{{ _score }}"></ion-toggle>
                 </ion-item>
                 

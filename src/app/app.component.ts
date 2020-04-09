@@ -40,15 +40,12 @@ export class MyApp {
         
         this.nomeUser = sessionStorage.getItem('usua_nome') !== null ? sessionStorage.getItem('usua_nome') : this.nomeUser
         this.nomeEmpresa = sessionStorage.getItem('usem_empr_nome') !== null ? sessionStorage.getItem('usem_empr_nome') : this.nomeEmpresa
-        
-        console.log(this.network.type);
 
         this.network.onConnect()
 			.subscribe(
 				() => {
                     setTimeout(() => {
-                        if (this.network.type === 'wifi') {
-                            //console.log('we got a wifi connection, woohoo!');
+                        if (this.network.type === this.network.Connection.WIFI) {
                             this.toastCtrl.create({
                                 message: 'Network Wifi connected',
                                 duration: 3000
@@ -62,18 +59,23 @@ export class MyApp {
 		this.network.onDisconnect()
 			.subscribe(
 				() => {
-                    if (this.network.type === this.network.Connection.CELL_4G || this.network.type === this.network.Connection.NONE) {
+                    if (this.network.type !== this.network.Connection.WIFI) {
                         setTimeout(() => {
                             this.showLoaderWifi();
                         }, 1000);
                     }
+                    // if (this.network.type === this.network.Connection.CELL_4G || this.network.type === this.network.Connection.NONE) {
+                    //     setTimeout(() => {
+                    //         this.showLoaderWifi();
+                    //     }, 1000);
+                    // }
 				}
 			);
         
         // used for an example of ngFor and navigation
         this.pages = [
-            { title: 'Início', component: HomePage, icon: 'home' },
-            { title: 'Cadastrar', component: AuditoriaFormPage, icon: 'md-add-circle' },
+            { title: 'Home', component: HomePage, icon: 'home' },
+            { title: 'Register Audit', component: AuditoriaFormPage, icon: 'md-add-circle' },
         ];
 
     }
@@ -101,15 +103,15 @@ export class MyApp {
                 if(retorno.usem_empr_id == '1'){
 
                     this.pages = [
-                        { title: 'Início', component: HomePage, icon: 'home' },
-                        { title: 'Cadastrar', component: AuditoriaFormPage, icon: 'md-add-circle' },
+                        { title: 'Home', component: HomePage, icon: 'home' },
+                        { title: 'Register Audit', component: AuditoriaFormPage, icon: 'md-add-circle' },
                     ];
 
                 }else{
 
                     this.pages = [
-                        { title: 'Início', component: HomePage, icon: 'home' },
-                        // { title: 'Cadastrar', component: AuditoriaFormPage, icon: 'md-add-circle' },
+                        { title: 'Home', component: HomePage, icon: 'home' },
+                        // { title: 'Register Audit', component: AuditoriaFormPage, icon: 'md-add-circle' },
                     ];
 
                 }

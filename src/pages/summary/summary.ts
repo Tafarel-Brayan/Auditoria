@@ -81,6 +81,14 @@ export class SummaryPage {
         )
     }
 
+    doRefresh(event) {
+		
+		setTimeout(() => {
+			this.ionViewDidEnter();
+			event.complete();
+		}, 2000);
+	}
+
     showRadarChart(){
 
         let labels = [];
